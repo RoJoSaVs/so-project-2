@@ -2,6 +2,8 @@ all: build
 
 build: # Compile all files needed to run the project
 	gcc code/client.c -o output/client -lpthread
+	gcc Servidor_secu.c -o Servidor_secu
+	gcc Cliente_secu.c -o Cliente_secu -lpthread -lrt
 
 
 
@@ -22,6 +24,11 @@ server:
 	gcc code/serverTest.c -o output/serverTest
 	./output/serverTest
 
+server_secu:
+	./Servidor_secu 2
+
+client_secu:
+	./Cliente_secu 0.0.0.0 1100 test.jpg 7 7
 
 reset:
 	rm output/*
