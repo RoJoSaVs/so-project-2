@@ -15,6 +15,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/select.h>
 
 /*Definición de constantes*/
 #define BUFFSIZE 1
@@ -33,7 +35,7 @@ void getIP(int tipo, char * IP);
 */
 int main(int argc, char *argv[]){
 	struct sockaddr_in stSockAddr;
-    	struct sockaddr_in clSockAddr;
+    struct sockaddr_in clSockAddr;
 	FILE *archivo;
 	char *direccIP;
 	int SocketServerFD;
@@ -71,22 +73,41 @@ int main(int argc, char *argv[]){
 	}//End if-bind
 	inet_pton(AF_INET, direccIP, &stSockAddr.sin_addr);
 	printf("Socket atado a la dirección %s\n",(char *)inet_ntoa(stSockAddr.sin_addr));	
+
 	if(listen(SocketServerFD, 10) == ERROR){
 		perror("Error listen");
 		close(SocketServerFD);
 		exit(EXIT_FAILURE);
 	}//End if-listen
 
+	// Configurar la entrada estándar para no bloquear
+    int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+    fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
 	while (1){
-		clientLen = sizeof(clSockAddr);
 
+		fd_set readfds;
+        FD_ZERO(&readfds);
+        FD_SET(SocketServerFD, &readfds);
+        FD_SET(STDIN_FILENO, &readfds);
+		
+		if (select(SocketServerFD + 1, &readfds, NULL, NULL, NULL) == -1) {
+            perror("Error en select");
+            exit(EXIT_FAILURE);
+        }
+		// Verificar si se ha presionado una tecla
+        if (FD_ISSET(STDIN_FILENO, &readfds)) {
+            printf("Se ha presionado una tecla. Cerrando el servidor...\n");
+			close(SocketServerFD);
+            exit(EXIT_FAILURE);
+			break;
+        }
+		clientLen = sizeof(clSockAddr);
 		//Espera por la conexión de un cliente//
 		if ((SocketClientFD = accept(SocketServerFD, 
 						    (struct sockaddr *) &clSockAddr,
 						    &clientLen)) < 0){
 			perror("Fallo para acpetar la conexión del cliente");
 		}//End if-accept
-
 		/*Se configura la dirección del cliente*/
 		clSockAddr.sin_family = AF_INET;
 		clSockAddr.sin_port = htons(PUERTO);
@@ -94,12 +115,15 @@ int main(int argc, char *argv[]){
 
 		/*Se recibe el archivo del cliente*/
 		recibirArchivo(SocketClientFD, archivo);
-		
+
+
+
 
 	}//End infinity while
 
  	close(SocketClientFD);
 	close(SocketServerFD);
+	
 	return 0;
 }//End main program
 
@@ -112,7 +136,7 @@ void recibirArchivo(int SocketFD, FILE *file){
 	enviarConfirmacion(SocketFD);
 	enviarMD5SUM(SocketFD);
 	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
-		printf("%s",buffer);
+		//printf("%s",buffer);
 		fwrite(buffer,sizeof(char),1,file);
 	}//Termina la recepción del archivo
 
