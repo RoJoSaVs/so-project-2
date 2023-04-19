@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 	FILE *archivo;
 	
 	if(argc < 6){
-		perror("USO:./clientFiles <IP del servidor> <Puerto> <archivo a enviar> <N-threads> <N-ciclos>");
+		perror("USO:./Cliente_secu <IP del servidor> <Puerto> <archivo a enviar> <N-threads> <N-ciclos>");
 		exit(EXIT_FAILURE);
 	}
  
