@@ -10,17 +10,11 @@ build: # Compile all files needed to run the project
 	gcc Cliente_secu.c -o Cliente_secu -lpthread -lrt
 
 
-
-
 client: # -lpthread: Require to use threads
-	gcc code/client.c -o output/client -lpthread
-
-
-clientExec:
 	clear
 	gcc code/client.c -o output/client -lpthread
 	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	./output/client 127.0.0.1 1100 code/test.jpg 2 2
+	./output/client 127.0.0.1 25565 code/test.jpg 1 2
 
 
 server:
@@ -31,19 +25,14 @@ server:
 	gcc code/Servidor_secu.c -o output/Servidor_secu
 	./output/Servidor_secu 0
 
+heavy:
+	clear
+	gcc code/heavyServer.c -o output/heavyServer
+	./output/heavyServer
+
+
 server_secu:
 	./Servidor_secu 2
-
-client_secu:
-	./Cliente_secu 0.0.0.0 1100 test.jpg 7 7
-
-reset:
-	rm output/*
-	clear
-
-test:
-	gcc code/test.c -o output/test
-	./output/test
 
 
 visualizer:
@@ -56,3 +45,16 @@ visualizer:
 init: # Define shared variables for stats
 	gcc code/sharedObjectsInit.c -o output/sharedObjectsInit
 	./output/sharedObjectsInit
+	
+
+reset:
+	rm output/*
+	# rm files/fifo/*
+	rm files/heavy/*
+	# rm files/threads/*
+	# rm files/preheavy/*
+	clear
+
+test:
+	gcc code/test.c -o output/test
+	./output/test
