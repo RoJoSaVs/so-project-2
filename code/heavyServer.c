@@ -26,9 +26,19 @@ int addrlen = sizeof(address);
 //----------------------------------------------------------------//
 //----------------------------------------------------------------//
 
+void sobelFilter(char fileName[30])
+{
+	char command[100] = "./output/sobel ";
+	strcat(command, fileName);
+	strcat(command, " ");
+	strcat(command, fileName);
+
+	system(command);
+}
+
 void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 {
-	fork();
+	fork(); //https://www.geeksforgeeks.org/fork-system-call/
 	if(getpid() != mainProcessPid)
 	{
 		FILE *file;
@@ -52,6 +62,8 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		}
 
 		fclose(file);
+
+		sobelFilter(fileName); // Process Picture
 	}
 }
 
@@ -100,7 +112,7 @@ void runServer(int index)
 
 	if(getpid() != mainProcessPid) // Destroy the process created by fork
 	{
-		exit(0);
+		exit(0); //https://stackoverflow.com/questions/6501522/how-to-kill-a-child-process-by-the-parent-process
 	}
 }
 
