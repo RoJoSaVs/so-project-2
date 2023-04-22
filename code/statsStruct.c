@@ -4,31 +4,31 @@ typedef struct statsStruct // Struct for visualizer module
 {
     // FIFO
     int totalRequestSequential;
-    int timeExecutionSequential;
-    int averageRequestTimeSequential;
-    int memoryConsumptionSequential;
-    int fourStatSequential;
+    double timeExecutionSequential;
+    double averageRequestTimeSequential;
+    double memoryConsumptionSequential;
+    double fourStatSequential;
 
     // Heavy Process
     int totalRequestHeavyProcess;
-    int timeExecutionHeavyProcess;
-    int averageRequestTimeHeavyProcess;
-    int memoryConsumptionHeavyProcess;
-    int fourStatHeavyProcess;
+    double timeExecutionHeavyProcess;
+    double averageRequestTimeHeavyProcess;
+    double memoryConsumptionHeavyProcess;
+    double fourStatHeavyProcess;
 
     // Threads
     int totalRequestThreads;
-    int timeExecutionThreads;
-    int averageRequestTimeThreads;
-    int memoryConsumptionThreads;
-    int fourStatThreads;
+    double timeExecutionThreads;
+    double averageRequestTimeThreads;
+    double memoryConsumptionThreads;
+    double fourStatThreads;
 
     // Pre Heavy Process
     int totalRequestPreHeavy;
-    int timeExecutionPreHeavy;
-    int averageRequestTimePreHeavy;
-    int memoryConsumptionPreHeavy;
-    int fourStatPreHeavy;
+    double timeExecutionPreHeavy;
+    double averageRequestTimePreHeavy;
+    double memoryConsumptionPreHeavy;
+    double fourStatPreHeavy;
 
     int killProcess; // Read only for server | visualizer can edit
 

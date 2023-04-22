@@ -42,7 +42,7 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 	if(getpid() != mainProcessPid)
 	{
 		FILE *file;
-		char* response = "Done";
+		char* response = "heavy";
 		char buffer[1];
 		int received = -1;
 
