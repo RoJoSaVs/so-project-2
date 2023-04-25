@@ -24,7 +24,7 @@
 #define ERROR		-1
 
 /*Prototipos de función*/
-void recibirArchivo(int SocketFD, FILE *file);
+void recibirArchivo(int SocketFD, FILE *file,int index2);
 void enviarConfirmacion(int SocketFD);
 void enviarMD5SUM(int SocketFD);
 void getIP(int tipo, char * IP);
@@ -33,6 +33,17 @@ void getIP(int tipo, char * IP);
  * wlan: 1
  * eth0: 2
 */
+
+void sobelFilter(char fileName[30])
+{
+	char command[100] = "./output/sobel ";
+	strcat(command, fileName);
+	strcat(command, " ");
+	strcat(command, fileName);
+
+	system(command);
+}
+
 int main(int argc, char *argv[]){
 	struct sockaddr_in stSockAddr;
     struct sockaddr_in clSockAddr;
@@ -44,9 +55,19 @@ int main(int argc, char *argv[]){
 	int serverLen;
 	direccIP = malloc(20);
 
+	char portName[20];
+	sprintf(portName, "%d", PUERTO);
+	char port_aux[30] = "Socket atado en el puerto: ";
+	strcat(port_aux, portName);
+	char port_aux1[30] = "\n";
+	strcat(port_aux, port_aux1);
+	printf(port_aux);
+
+	int contador =0;
+
 	/*Verifica que el número de parametros sea el correcto*/
 	if(argc < 2){
-		perror("Uso ./ServerFiles <clave de interfaz 0:lo 1:wlan 2:eth0>");
+		perror("Uso ./Servidor_secu <clave de interfaz 0:lo 1:wlan 2:eth0>");
 		exit(EXIT_FAILURE);	
 	}
 
@@ -72,7 +93,9 @@ int main(int argc, char *argv[]){
 		exit(EXIT_FAILURE);
 	}//End if-bind
 	inet_pton(AF_INET, direccIP, &stSockAddr.sin_addr);
+	
 	printf("Socket atado a la dirección %s\n",(char *)inet_ntoa(stSockAddr.sin_addr));	
+	
 
 	if(listen(SocketServerFD, 10) == ERROR){
 		perror("Error listen");
@@ -112,11 +135,11 @@ int main(int argc, char *argv[]){
 		clSockAddr.sin_family = AF_INET;
 		clSockAddr.sin_port = htons(PUERTO);
 		printf("Cliente conectado: %s\n",inet_ntoa(clSockAddr.sin_addr));
-
+		if(contador<100){
 		/*Se recibe el archivo del cliente*/
-		recibirArchivo(SocketClientFD, archivo);
-
-
+		recibirArchivo(SocketClientFD, archivo,contador);
+		contador++;
+		}
 
 
 	}//End infinity while
@@ -127,12 +150,19 @@ int main(int argc, char *argv[]){
 	return 0;
 }//End main program
 
-void recibirArchivo(int SocketFD, FILE *file){
+void recibirArchivo(int SocketFD, FILE *file,int index2){
 	char buffer[BUFFSIZE];
 	int recibido = -1;
-
+	printf("Imagen recibida-----------------------------------------\n");
 	/*Se abre el archivo para escritura*/
-	file = fopen("archivoRecibido.jpg","wb");
+	int index = index2;
+	char indexName[20];
+	char extension[20] = ".jpg";
+	char fileName[30] = "files/fifo/received";
+	sprintf(indexName, "%d", index);
+	strcat(fileName, indexName);
+	strcat(fileName, extension);
+	file = fopen(fileName, "wb");
 	enviarConfirmacion(SocketFD);
 	enviarMD5SUM(SocketFD);
 	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
@@ -141,7 +171,7 @@ void recibirArchivo(int SocketFD, FILE *file){
 	}//Termina la recepción del archivo
 
 	fclose(file);
-	
+	sobelFilter(fileName);
 
 }//End recibirArchivo procedure
 
