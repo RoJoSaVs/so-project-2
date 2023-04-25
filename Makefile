@@ -8,14 +8,15 @@ build: # Compile all files needed to run the project
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
 	gcc code/Servidor_secu.c -o output/Servidor_secu
+	gcc code/threadServer.c -o output/threadServer
 	gcc code/Cliente_secu.c -o Cliente_secu -lpthread -lrt
 
 
 client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
-	./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	#./output/client 127.0.0.1 25565 itachi.jpg 1 2
+	#./output/client $(ip) $(port) $(image) $(threads) $(loops)
+	./output/client 127.0.0.1 25565 itachi.jpg 1 2
 	#./output/client 0.0.0.0 1100 itachi.jpg 1 2
 
 
@@ -36,12 +37,15 @@ heavy:
 server_secu:
 	./output/Servidor_secu 2
 
+thread_server:
+	gcc code/threadServer.c -o output/threadServer
+	./output/threadServer
 
 visualizer:
 	clear
 	# gcc code/visualizer.c -o output/visualizer
 	# ./output/visualizer
-	python code/visualizer.py
+	python3 code/visualizer.py
 
 
 init: # Define shared variables for stats
@@ -59,7 +63,7 @@ sobel: #Compile files needed to apply sobel filter
 
 reset:
 	rm output/*
-	rm image.rgb
+	# rm image.rgb
 	rm sobel_countour.gray
 	rm sobel_grad.gray
 	# rm files/fifo/*
