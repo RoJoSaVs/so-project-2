@@ -32,12 +32,12 @@ void output_gray_scale_image(bool intermediate_output, byte * gray_image, int gr
 //see 'output_gray_scale_image'
 //Used both for horizontal gradient and vertical gradient
 //sobel_res = sobel_h_res or sobel_v_res
-void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name)
+void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name, char * serverPath)
 {
 	  if(intermediate_output)
 	  {
 			//output the horizontal axis-gradient to an image file
-	        char * file_out_grad = "sobel_grad.gray";
+	        char * file_out_grad = strcat(serverPath, "sobel_grad.gray");
 			write_file(file_out_grad, sobel_res, gray_size);
 			//Convert the output file to PNG
 			char * pngConvert[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_out_grad, " ", png_file_name};

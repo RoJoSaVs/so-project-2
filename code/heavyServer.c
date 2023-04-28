@@ -32,6 +32,7 @@ void sobelFilter(char fileName[30])
 	strcat(command, fileName);
 	strcat(command, " ");
 	strcat(command, fileName);
+	strcat(command, " files/heavy/");
 
 	system(command);
 }
