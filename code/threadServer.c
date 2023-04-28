@@ -17,6 +17,9 @@
 
 #define PORT 25565
 
+/*
+ * Apply Sobel filter to image
+ */
 void sobelFilter(char fileName[30])
 {
     char command[100] = "./output/sobel ";
@@ -27,15 +30,22 @@ void sobelFilter(char fileName[30])
     system(command);
 }
 
+/*
+ * Called when a new thread is created to handle an incoming connection.
+ * Takes a single argument, which is a pointer to the file descriptor of the
+ * new socket that was created when the connection was accepted.
+ */
 void *handleConnection(void *arg)
 {
     int new_socket = *((int *)arg);
     char buffer[1];
     int received = -1;
 
+    // Connection accepted
     char *response = "OK";
     send(new_socket, response, strlen(response), 0);
 
+    // File to receive the incoming data from the client, created based on the thread ID,
     FILE *file;
     char indexName[20];
     char extension[20] = ".jpg";
@@ -54,6 +64,7 @@ void *handleConnection(void *arg)
 
     sobelFilter(fileName);
 
+    // Close socket and exit thread
     close(new_socket);
     pthread_exit(NULL);
 }
@@ -65,14 +76,14 @@ int main(int argc, char const *argv[])
     int opt = 1;
     int addrlen = sizeof(address);
 
-    // Creating socket file descriptor
+    // Creating socket file descriptor (IPv4, stream-oriented connection, OS chooses protocol)
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
 
-    // Forcefully attaching socket to the port 8080
+    // Allow the socket to be reused immediately after it is closed
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
     {
         perror("setsockopt");
@@ -80,22 +91,29 @@ int main(int argc, char const *argv[])
     }
 
     address.sin_family = AF_INET;
+
+    // Allows the socket to accept connections from any IP address.
     address.sin_addr.s_addr = INADDR_ANY;
+
+    // Converted to network byte order
     address.sin_port = htons(PORT);
 
-    // Forcefully attaching socket to the PORT
+    // Forcefully attaching socket to the PORT, binds the socket to a specific IP
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
     {
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
 
+    // Listen forncoming connections. The server_fd parameter is the socket file
+    // descriptor, second parameter is the maximum number of queued connections
     if (listen(server_fd, 3) < 0)
     {
         perror("listen");
         exit(EXIT_FAILURE);
     }
 
+    // Waits for an incoming connection
     while (1)
     {
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
