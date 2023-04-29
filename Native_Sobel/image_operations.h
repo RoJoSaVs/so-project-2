@@ -35,6 +35,6 @@ double compute_elapsed_time(struct timeval time_begin, struct timeval time_end);
 
 void output_gray_scale_image(bool intermediate_output, byte * gray_image, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name);
 
-void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name);
+void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name, char * serverPath);
 
 #endif /* IMAGE_OPERATIONS_H_ */
