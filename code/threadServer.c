@@ -42,7 +42,7 @@ void *handleConnection(void *arg)
     int received = -1;
 
     // Connection accepted
-    char *response = "OK";
+    char *response = "thread";
     send(new_socket, response, strlen(response), 0);
 
     // File to receive the incoming data from the client, created based on the thread ID,
@@ -73,7 +73,7 @@ void *handleConnection(void *arg)
     pthread_exit(NULL);
 }
 
-int main(int argc, char const *argv[])
+int runServer(int index)
 {
     int server_fd, new_socket;
     struct sockaddr_in address;
@@ -118,23 +118,29 @@ int main(int argc, char const *argv[])
     }
 
     // Waits for an incoming connection
-    while (1)
+    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
     {
-        if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
-        {
-            perror("accept");
-            exit(EXIT_FAILURE);
-        }
-
-        pthread_t thread_id;
-        if (pthread_create(&thread_id, NULL, handleConnection, (void *)&new_socket) < 0)
-        {
-            perror("could not create thread");
-            exit(EXIT_FAILURE);
-        }
-
-        pthread_detach(thread_id);
+        perror("accept");
+        exit(EXIT_FAILURE);
     }
 
+    pthread_t thread_id;
+    if (pthread_create(&thread_id, NULL, handleConnection, (void *)&new_socket) < 0)
+    {
+        perror("could not create thread");
+        exit(EXIT_FAILURE);
+    }
+
+    pthread_detach(thread_id);
+}
+
+int main(int argc, char const* argv[])
+{
+    int totalPictures = 5;
+    for(int counter = 1; counter <= totalPictures; counter++)
+    {
+        runServer(counter);
+        printf("Picture #%d processed\n", counter);
+    }
     return 0;
 }

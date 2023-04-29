@@ -25,11 +25,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c534e7b5-953e-472d-8c01-dcf2937d6596" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Cliente_secu" beforeDir="false" afterPath="$PROJECT_DIR$/Cliente_secu" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Servidor_secu" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/client" beforeDir="false" afterPath="$PROJECT_DIR$/output/client" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/sobel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Native_Sobel/file_operations.h" beforeDir="false" afterPath="$PROJECT_DIR$/Native_Sobel/file_operations.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Native_Sobel/image_operations.c" beforeDir="false" afterPath="$PROJECT_DIR$/Native_Sobel/image_operations.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/threadServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/threadServer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/client" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/threadServer" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,23 +88,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/jess/Documents/TEC/so-project-2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/jess/Documents/TEC/so-project-2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Makefile Target.thread_server">
+}</component>
+  <component name="RunManager" selected="Makefile Target.sobel">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="so-project-2" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -159,25 +160,20 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="client" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
       <makefile filename="$PROJECT_DIR$/Makefile" target="client" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="init" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="init" workingDirectory="" arguments="">
+    <configuration name="reset" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="reset" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="reset" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="reset" workingDirectory="" arguments="">
+    <configuration name="sobel" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="sobel" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
@@ -206,19 +202,19 @@
       <item itemvalue="Makefile Application.sobel" />
       <item itemvalue="Makefile Application.test" />
       <item itemvalue="Makefile Application.visualizer" />
+      <item itemvalue="Makefile Target.sobel" />
       <item itemvalue="Makefile Target.client" />
-      <item itemvalue="Makefile Target.init" />
       <item itemvalue="Makefile Target.reset" />
       <item itemvalue="Makefile Target.thread_server" />
       <item itemvalue="Makefile Target.visualizer" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile Target.sobel" />
+        <item itemvalue="Makefile Target.reset" />
         <item itemvalue="Makefile Target.thread_server" />
         <item itemvalue="Makefile Target.visualizer" />
         <item itemvalue="Makefile Target.client" />
-        <item itemvalue="Makefile Target.reset" />
-        <item itemvalue="Makefile Target.init" />
       </list>
     </recent_temporary>
   </component>

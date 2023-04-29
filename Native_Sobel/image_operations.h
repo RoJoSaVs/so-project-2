@@ -1,10 +1,3 @@
-/*
- * image_operations.h
- *
- *  Created on: Jun 14, 2019
- *      Author: daniele
- */
-
 #ifndef IMAGE_OPERATIONS_H_
 #define IMAGE_OPERATIONS_H_
 

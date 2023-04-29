@@ -55,8 +55,10 @@ init: # Define shared variables for stats
 
 sobel: #Compile files needed to apply sobel filter
 	clear
-	gcc Native_Sobel/file_operations.c Native_Sobel/image_operations.c Native_Sobel/main.c -lm -o output/sobel
-	./output/sobel itachi.jpg itachi2.jpg files/heavy/
+	./output/sobel itachi.jpg files/itachi2.jpg
+	rm image.rgb
+	rm sobel_countour.gray
+	rm sobel_grad.gray
 
 reset:
 	rm output/*
@@ -64,8 +66,8 @@ reset:
 	rm sobel_countour.gray
 	rm sobel_grad.gray
 	# rm files/fifo/*
-	# rm files/heavy/*
-	# rm files/threads/*
+	rm files/heavy/*
+	rm files/threads/*
 	# rm files/preheavy/*
 	clear
 

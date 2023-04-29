@@ -1,3 +1,4 @@
+
 //Credits for this file go to: https://github.com/petermlm/SobelFilter
 
 #include "image_operations.h"
@@ -15,17 +16,17 @@
 //Output: imgs_out/img_gray.png as an image containing the gray-scale input image
 void output_gray_scale_image(bool intermediate_output, byte * gray_image, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name)
 {
-	if(intermediate_output)
-	{
-		char * file_gray = "img_gray.gray";
-		write_file(file_gray, gray_image, gray_size);
+    if(intermediate_output)
+    {
+        char * file_gray = "img_gray.gray";
+        write_file(file_gray, gray_image, gray_size);
 
-		char * pngConvertGray[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_gray, " ", png_file_name};
-		char * strGrayToPNG = array_strings_to_string(pngConvertGray, 8, string_buffer_size);
-		system(strGrayToPNG);
+        char * pngConvertGray[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_gray, " ", png_file_name};
+        char * strGrayToPNG = array_strings_to_string(pngConvertGray, 8, string_buffer_size);
+        system(strGrayToPNG);
 
-		printf("Output gray-scale image [%s] \n", file_gray);
-	}
+        printf("Output gray-scale image [%s] \n", file_gray);
+    }
 
 }
 
@@ -34,17 +35,17 @@ void output_gray_scale_image(bool intermediate_output, byte * gray_image, int gr
 //sobel_res = sobel_h_res or sobel_v_res
 void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, char * str_width, char * str_height, int string_buffer_size, char * png_file_name, char * serverPath)
 {
-	  if(intermediate_output)
-	  {
-			//output the horizontal axis-gradient to an image file
-	        char * file_out_grad = strcat(serverPath, "sobel_grad.gray");
-			write_file(file_out_grad, sobel_res, gray_size);
-			//Convert the output file to PNG
-			char * pngConvert[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_out_grad, " ", png_file_name};
-			char * str_grad_to_PNG = array_strings_to_string(pngConvert, 8, string_buffer_size);
-			system(str_grad_to_PNG);
-			//printf("Output [%s] \n", png_file_name);
-	   }
+    if(intermediate_output)
+    {
+        //output the horizontal axis-gradient to an image file
+        char * file_out_grad = strcat(serverPath, "sobel_grad.gray");
+        write_file(file_out_grad, sobel_res, gray_size);
+        //Convert the output file to PNG
+        char * pngConvert[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_out_grad, " ", png_file_name};
+        char * str_grad_to_PNG = array_strings_to_string(pngConvert, 8, string_buffer_size);
+        system(str_grad_to_PNG);
+        //printf("Output [%s] \n", png_file_name);
+    }
 }
 
 
@@ -65,7 +66,7 @@ int rgb_to_gray(byte *rgb, byte **grayImage, int buffer_size)
     // Calculate the value for every pixel in gray
     for(int i=0; i < gray_size; i++)
     {
-    	//Formula according to: https://stackoverflow.com/questions/17615963/standard-rgb-to-grayscale-conversion
+        //Formula according to: https://stackoverflow.com/questions/17615963/standard-rgb-to-grayscale-conversion
         *p_gray = 0.30*p_rgb[0] + 0.59*p_rgb[1] + 0.11*p_rgb[2];
         p_rgb += 3;
         p_gray++;
@@ -171,11 +172,11 @@ void contour(byte *sobel_h, byte *sobel_v, int gray_size, byte **contour_img)
 //Output: the time elapsed between the starting time and the ending time
 double compute_elapsed_time(struct timeval time_begin, struct timeval time_end)
 {
-	//time in microseconds (us)
-	double time_elapsed_us =  (double) (time_end.tv_usec - time_begin.tv_usec) / 1000000 +  (double) (time_end.tv_sec - time_begin.tv_sec);
+    //time in microseconds (us)
+    double time_elapsed_us =  (double) (time_end.tv_usec - time_begin.tv_usec) / 1000000 +  (double) (time_end.tv_sec - time_begin.tv_sec);
 
-	//return time in milliseconds (ms)
-	double time_elapsed_ms = time_elapsed_us * 1000;
+    //return time in milliseconds (ms)
+    double time_elapsed_ms = time_elapsed_us * 1000;
 
-	return time_elapsed_ms;
+    return time_elapsed_ms;
 }
