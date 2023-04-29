@@ -49,17 +49,21 @@ void *handleConnection(void *arg)
     FILE *file;
     char indexName[20];
     char extension[20] = ".jpg";
-    char fileName[30] = "files/threads";
+    char fileName[30] = "files/threads/";
     sprintf(indexName, "%d", (int)pthread_self());
     strcat(fileName, indexName);
     strcat(fileName, extension);
     file = fopen(fileName, "wb");
 
+    int totalReceived = 0;
+
     while ((received = recv(new_socket, buffer, 1, 0)) > 0)
     {
         fwrite(buffer, sizeof(char), 1, file);
+        totalReceived += received;
     }
 
+    printf("Total bytes received: %d\n", totalReceived);
     fclose(file);
 
     sobelFilter(fileName);
@@ -105,7 +109,7 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE);
     }
 
-    // Listen forncoming connections. The server_fd parameter is the socket file
+    // Listen for incoming connections. The server_fd parameter is the socket file
     // descriptor, second parameter is the maximum number of queued connections
     if (listen(server_fd, 3) < 0)
     {
