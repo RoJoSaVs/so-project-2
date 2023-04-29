@@ -14,9 +14,8 @@ build: # Compile all files needed to run the project
 client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
-	./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	#./output/client 127.0.0.1 25565 itachi.jpg 1 2
-	#./output/client 0.0.0.0 1100 itachi.jpg 1 2
+	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
+	./output/client 127.0.0.1 25565 files/img/itachi.jpg 1 5
 
 
 server:
@@ -53,6 +52,7 @@ sobel: #Compile files needed to apply sobel filter
 	clear
 	gcc Native_Sobel/file_operations.c Native_Sobel/image_operations.c Native_Sobel/main.c -lm -o output/sobel
 	./output/sobel itachi.jpg itachi2.jpg files/heavy/
+
 
 reset:
 	rm output/*

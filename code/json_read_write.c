@@ -6,11 +6,11 @@ cJSON *root;
 FILE *archivo;
 char nombre_archivo[100];
 
-int read(){
+int jsonRead(){
     // Leer el archivo JSON
     
 
-    archivo = fopen("test.json", "r");
+    archivo = fopen("files/stats.json", "r");
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo.\n");
@@ -56,7 +56,7 @@ int read(){
     return 0; 
 }
 
-int write(char const * name,int totalrequest, int timeExecution,int averageRequestTime, int memoryConsumption, int fourStat){
+int jsonWrite(char const * name,int totalrequest, double timeExecution,int averageRequestTime, int memoryConsumption, int totalBytesSend){
      // Crear los objetos JSON
     cJSON *obj1 = cJSON_CreateObject();
     cJSON *arr = cJSON_CreateArray();
@@ -67,13 +67,13 @@ int write(char const * name,int totalrequest, int timeExecution,int averageReque
     cJSON_AddNumberToObject(obj1, "timeExecution", timeExecution);
     cJSON_AddNumberToObject(obj1, "averageRequestTime", averageRequestTime);
     cJSON_AddNumberToObject(obj1, "memoryConsumption", memoryConsumption);
-    cJSON_AddNumberToObject(obj1, "fourStat", fourStat);
+    cJSON_AddNumberToObject(obj1, "totalBytesSend", totalBytesSend);
 
     cJSON_AddItemToArray(root, obj1);
 
     // Escribir el archivo JSON
 
-    archivo = fopen("test.json", "w");
+    archivo = fopen("files/stats.json", "w");
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo.\n");
@@ -83,10 +83,13 @@ int write(char const * name,int totalrequest, int timeExecution,int averageReque
     char *json_str = cJSON_Print(root);
     fprintf(archivo, "%s", json_str);
     fclose(archivo);
+    return 0;
 }
 
-int save(char const * name,int totalrequest, int timeExecution,int averageRequestTime, int memoryConsumption, int fourStat){
-    read();
-    write(name,totalrequest,timeExecution,averageRequestTime,memoryConsumption,fourStat);
+int save(char const * name, int totalrequest, double timeExecution, int averageRequestTime, int memoryConsumption, int totalBytesSend){
+    
+    int readRes = jsonRead();
+    int writeRes = jsonWrite(name, totalrequest, timeExecution, averageRequestTime, memoryConsumption, totalBytesSend);
+    return 0;
 }
 
