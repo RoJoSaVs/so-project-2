@@ -25,12 +25,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c534e7b5-953e-472d-8c01-dcf2937d6596" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/heavyServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/heavyServer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/threads/threads.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Servidor_secu" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/client" beforeDir="false" afterPath="$PROJECT_DIR$/output/client" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/sobel" beforeDir="false" afterPath="$PROJECT_DIR$/output/sobel" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/threadServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/threadServer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/-1317034432.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/-1317034432.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/-1325427136.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/-1325427136.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/-1442859456.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/-1442859456.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/-1459644864.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/-1459644864.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1153410624.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1161803328.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1170196032.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1178588736.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1186981440.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/1195374144.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/150902336.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/159295040.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/167687744.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/176080448.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/184473152.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/192865856.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/201258560.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/209651264.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/218043968.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/226436672.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/234829376.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/243222080.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/251614784.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/260007488.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/268400192.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/276792896.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/285185600.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/293578304.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/301971008.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/310363712.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/318756416.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/327149120.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/335541824.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/754947648.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/754947648.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/796911168.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/796911168.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/805303872.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/files/threads/805303872.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/threadServer" beforeDir="false" afterPath="$PROJECT_DIR$/output/threadServer" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +262,7 @@
       <workItem from="1682404634122" duration="4110000" />
       <workItem from="1682458054136" duration="1226000" />
       <workItem from="1682818800422" duration="6160000" />
-      <workItem from="1682825568095" duration="7290000" />
+      <workItem from="1682825568095" duration="7681000" />
     </task>
     <servers />
   </component>

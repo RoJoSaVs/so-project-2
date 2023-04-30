@@ -54,7 +54,7 @@ void *handleConnection(void *arg)
     while(1){
         // Rojo = 0, Verde = 1
         if (!semaphore){
-            sleep(1);
+            sleep(2);
         }
         else{
             semaphore = 0;
