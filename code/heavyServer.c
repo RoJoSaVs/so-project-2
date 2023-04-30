@@ -6,6 +6,8 @@
 #include <unistd.h>
  #include <sys/types.h>
  #include <signal.h>
+ #include <sys/resource.h>
+
 
 //----------------------------------------------------------------//
 //---------------------- Constants Values ------------------------//
@@ -25,15 +27,24 @@ int addrlen = sizeof(address);
 // struct statsStruct *stats;
 //----------------------------------------------------------------//
 //----------------------------------------------------------------//
+void getMemoryConsumption()
+{
 
-void sobelFilter(char fileName[30])
+}
+
+
+void sobelFilter(char fileName[30], int index)
 {
 	char command[100] = "./sobel/sobel ";
 	strcat(command, fileName);
 	strcat(command, " ");
 	strcat(command, fileName);
 	strcat(command, " files/heavy/");
+	
+	char snum[5];
+	sprintf(snum, "%d", index);
 
+	strcat(command, snum);
 	system(command);
 }
 
@@ -69,7 +80,11 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		fclose(file);
         // up
 
-		sobelFilter(fileName); // Process Picture
+		sobelFilter(fileName, index); // Process Picture
+
+		close(new_socket); // closing the connected socket
+		shutdown(server_fd, SHUT_RDWR);// closing the listening socket
+		exit(0); //https://stackoverflow.com/questions/6501522/how-to-kill-a-child-process-by-the-parent-process
 	}
 }
 
@@ -115,21 +130,17 @@ void runServer(int index)
 	
 	close(new_socket); // closing the connected socket
 	shutdown(server_fd, SHUT_RDWR);// closing the listening socket
-
-	if(getpid() != mainProcessPid) // Destroy the process created by fork
-	{
-		exit(0); //https://stackoverflow.com/questions/6501522/how-to-kill-a-child-process-by-the-parent-process
-	}
 }
 
 
 int main(int argc, char const* argv[])
 {
-	int totalPictures = 5;
+	int totalPictures = 7;
 	for(int counter = 1; counter <= totalPictures; counter++)
 	{
 		runServer(counter);
 		printf("Picture #%d processed\n", counter);
 	}
+	
 	return 0;
 }

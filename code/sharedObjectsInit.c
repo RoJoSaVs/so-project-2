@@ -142,6 +142,6 @@ void editStats(int id, int totalRequest, int timeExecution, int averageRequestTi
 int main()
 {
     setSemaphore();
-    setSharedStats();
+    // setSharedStats();
     return 0;
 }
