@@ -154,17 +154,21 @@ int main(int argc, char *argv[])
             }
 
             char response[1024]; // Read message from server side
-            valread = read(client_fd, response, 1024);
-
+            if((valread = read(client_fd, response, 1024)) < 0){
+                perror("read failed");
+                exit(EXIT_FAILURE);
+            }
             bold_green();
             printf("\n---------------------------------------------------------------------\n");
             cyan();
-            printf("Message received from buffer: %s\n", response);
+            printf("%d Message received from buffer: %s\n", loops, response);
             bold_green();
             printf("---------------------------------------------------------------------\n");
             reset();
             strcpy(serverName, response);
-        
+
+            memset(response, 0, sizeof(response));
+
             close(client_fd); // closing the connected socket
         }
 

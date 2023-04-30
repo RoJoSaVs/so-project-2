@@ -21,12 +21,15 @@
 
 #define PORT 25565
 
-int static semaphore = 1;
-sem_t my_semaphore;
+//int static semaphore = 1;
+//sem_t my_semaphore;
+
+pthread_mutex_t semaphoreWriteRec = PTHREAD_MUTEX_INITIALIZER;
+
 
 void sobelFilter(char fileName[30])
 {
-    char command[100] = "./sobel/sobel ";
+    char command[100] = "./output/sobel ";
     strcat(command, fileName);
     strcat(command, " ");
     strcat(command, fileName);
@@ -41,8 +44,13 @@ void *handleConnection(void *arg)
     char buffer[1];
     int received = -1;
 
-    char *response = "OK";
+    char *response = malloc(strlen("thread") + 1); // +1 for null terminator
+    strcpy(response, "thread");
     send(new_socket, response, strlen(response), 0);
+
+    memset(response, 0, strlen(response));
+
+    //bzero(response, strlen(response));
 
     FILE *file;
     char indexName[20];
@@ -53,24 +61,21 @@ void *handleConnection(void *arg)
     strcat(fileName, extension);
     file = fopen(fileName, "wb");
 
+    // Rojo = 0, Verde = 1
+    while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
 
-    while(1){
-        // Rojo = 0, Verde = 1
-        sem_wait(&my_semaphore);
-        while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
-            fwrite(buffer, sizeof(char), 1, file);
-        }
-        sem_post(&my_semaphore);
-        sleep(3);
+        pthread_mutex_lock(&semaphoreWriteRec);
+        fwrite(buffer, sizeof(char), 1, file);
+        pthread_mutex_unlock(&semaphoreWriteRec);
     }
 
-
     fclose(file);
-
-    sobelFilter(fileName);
-
     close(new_socket);
-    pthread_exit(NULL);
+
+    //sobelFilter(fileName);
+
+    //pthread_exit(NULL);
+    pthread_detach(pthread_self());
 }
 
 
@@ -82,7 +87,7 @@ int main(int argc, char *argv[])
     int opt = 1;
     int addrlen = sizeof(address);
 
-    sem_init(&my_semaphore, 0, 1);
+    // sem_init(&my_semaphore, 0, 1);
 
     printf("Creating socket...\n");
     validateSocketCreation(&server_fd);
@@ -105,21 +110,19 @@ int main(int argc, char *argv[])
     while (1)
     {
         serverIndex++;
-        printf("%d, Client connected\n", serverIndex);
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
         {
             perror("accept");
             exit(EXIT_FAILURE);
         }
+        printf("%d, Client connected\n", serverIndex);
 
-       pthread_t thread_id;
+        pthread_t thread_id;
         if (pthread_create(&thread_id, NULL, handleConnection, (void *)&new_socket) < 0)
         {
             perror("could not create thread");
             exit(EXIT_FAILURE);
         }
-
-        pthread_detach(thread_id);
     }
 
     return 0;
