@@ -25,4 +25,21 @@ extern void validateSocketSetting(int *server_fd, int *opt){
     }
 }
 
+int validateBind(int *server_fd, struct sockaddr_in* address) {
+    if (bind(*server_fd, (struct sockaddr *)address, sizeof(*address)) < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+    return 0;
+}
+
+extern void validateSocketListen(int *server_fd){
+    if (listen((*server_fd), 3) < 0)
+    {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
+}
+
+
 #endif

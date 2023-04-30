@@ -68,4 +68,46 @@
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365
+	}, {
+		"server":	"OK=\u000eK",
+		"totalRequest":	5,
+		"timeExecution":	0.44266,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"OKPGe",
+		"totalRequest":	50,
+		"timeExecution":	4.488078,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OKÿÿ",
+		"totalRequest":	150,
+		"timeExecution":	13.404559,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	49720950
+	}, {
+		"server":	"OK´]þ~",
+		"totalRequest":	150,
+		"timeExecution":	13.42561,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	49720950
+	}, {
+		"server":	"OK\u000fXz",
+		"totalRequest":	500,
+		"timeExecution":	45.44968,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	165736500
+	}, {
+		"server":	"OKUd6",
+		"totalRequest":	500,
+		"timeExecution":	46.575194,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	165736500
 	}]

@@ -16,7 +16,7 @@ client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
 	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	./output/client 127.0.0.1 25565 files/img/itachi.jpg 1 5
+	./output/client 127.0.0.1 25565 files/img/itachi.jpg 500 1
 
 
 server:
@@ -55,11 +55,8 @@ init: # Define shared variables for stats
 
 sobel: #Compile files needed to apply sobel filter
 	clear
-	./output/sobel itachi.jpg files/itachi2.jpg
-	rm image.rgb
-	rm sobel_countour.gray
-	rm sobel_grad.gray
-
+	gcc Native_Sobel/file_operations.c Native_Sobel/image_operations.c Native_Sobel/main.c -lm -o output/sobel
+	./output/sobel files/img/itachi.jpg itachi2.jpg files/threads/
 
 reset:
 	rm output/*

@@ -22,6 +22,7 @@
 #define PORT 25565
 
 int static semaphore = 1;
+sem_t my_semaphore;
 
 void sobelFilter(char fileName[30])
 {
@@ -55,16 +56,12 @@ void *handleConnection(void *arg)
 
     while(1){
         // Rojo = 0, Verde = 1
-        if (!semaphore){
-            sleep(3);
+        sem_wait(&my_semaphore);
+        while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
+            fwrite(buffer, sizeof(char), 1, file);
         }
-        else{
-            semaphore = 0;
-            while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
-                fwrite(buffer, sizeof(char), 1, file);
-            }
-            semaphore = 1;
-        }
+        sem_post(&my_semaphore);
+        sleep(3);
     }
 
 
@@ -85,6 +82,8 @@ int main(int argc, char *argv[])
     int opt = 1;
     int addrlen = sizeof(address);
 
+    sem_init(&my_semaphore, 0, 1);
+
     printf("Creating socket...\n");
     validateSocketCreation(&server_fd);
 
@@ -96,20 +95,13 @@ int main(int argc, char *argv[])
     address.sin_port = htons(PORT);
 
     printf("Binding socket...\n");
-    // Forcefully attaching socket to the PORT
-    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0)
-    {
-        perror("bind failed");
-        exit(EXIT_FAILURE);
-    }
+    validateBind(&server_fd, &address);
 
     printf("Listening to socket...\n");
-    if (listen(server_fd, 3) < 0)
-    {
-        perror("listen");
-        exit(EXIT_FAILURE);
-    }
+    validateSocketListen(&server_fd);
+
     int serverIndex = 0;
+
     while (1)
     {
         serverIndex++;
