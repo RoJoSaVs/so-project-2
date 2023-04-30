@@ -7,7 +7,7 @@
 *.obj
 *.elf
 
-# Linker output
+# Linker sobel
 *.ilk
 *.map
 *.exp
@@ -50,5 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-# output
+# sobel
 .vscode/
+
+files/threads/

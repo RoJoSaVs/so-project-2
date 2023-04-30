@@ -28,7 +28,7 @@ int addrlen = sizeof(address);
 
 void sobelFilter(char fileName[30])
 {
-	char command[100] = "./output/sobel ";
+	char command[100] = "./sobel/sobel ";
 	strcat(command, fileName);
 	strcat(command, " ");
 	strcat(command, fileName);

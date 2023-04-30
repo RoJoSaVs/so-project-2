@@ -585,14 +585,14 @@ static cJSON_bool print_number(const cJSON * const item, printbuffer * const out
         return false;
     }
 
-    /* reserve appropriate space in the output */
+    /* reserve appropriate space in the sobel */
     output_pointer = ensure(output_buffer, (size_t)length + sizeof(""));
     if (output_pointer == NULL)
     {
         return false;
     }
 
-    /* copy the printed number to the output and replace locale
+    /* copy the printed number to the sobel and replace locale
      * dependent decimal point with '.' */
     for (i = 0; i < ((size_t)length); i++)
     {
@@ -784,7 +784,7 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
     }
 
     {
-        /* calculate approximate size of the output (overestimate) */
+        /* calculate approximate size of the sobel (overestimate) */
         size_t allocation_length = 0;
         size_t skipped_bytes = 0;
         while (((size_t)(input_end - input_buffer->content) < input_buffer->length) && (*input_end != '\"'))
@@ -807,7 +807,7 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
             goto fail; /* string ended unexpectedly */
         }
 
-        /* This is at most how much we need for the output */
+        /* This is at most how much we need for the sobel */
         allocation_length = (size_t) (input_end - buffer_at_offset(input_buffer)) - skipped_bytes;
         output = (unsigned char*)input_buffer->hooks.allocate(allocation_length + sizeof(""));
         if (output == NULL)
@@ -873,7 +873,7 @@ static cJSON_bool parse_string(cJSON * const item, parse_buffer * const input_bu
         }
     }
 
-    /* zero terminate the output */
+    /* zero terminate the sobel */
     *output_pointer = '\0';
 
     item->type = cJSON_String;
@@ -1547,7 +1547,7 @@ static cJSON_bool print_array(const cJSON * const item, printbuffer * const outp
         return false;
     }
 
-    /* Compose the output array. */
+    /* Compose the sobel array. */
     /* opening square bracket */
     output_pointer = ensure(output_buffer, 1);
     if (output_pointer == NULL)
@@ -1722,7 +1722,7 @@ static cJSON_bool print_object(const cJSON * const item, printbuffer * const out
         return false;
     }
 
-    /* Compose the output: */
+    /* Compose the sobel: */
     length = (size_t) (output_buffer->format ? 2 : 1); /* fmt: {\n */
     output_pointer = ensure(output_buffer, length + 1);
     if (output_pointer == NULL)

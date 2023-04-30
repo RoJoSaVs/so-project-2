@@ -5,12 +5,12 @@
 
 #include "file_operations.h"
 
-//Input: intermediate_output: true --> the content of gray_image is output to file_gray_name and then converted to png_file_name
-//					          false --> the image is not output
-//		 buffer_image: an array containing the bytes to be output to file_gray_name and converted to png_file_name
-//		 buffer_size: the size of the 'buffer_image' output
-//		 str_width: the width of the output image in string format (ex: "512")
-//		 str_height: the height of the output image in string format (ex: "512")
+//Input: intermediate_output: true --> the content of gray_image is sobel to file_gray_name and then converted to png_file_name
+//					          false --> the image is not sobel
+//		 buffer_image: an array containing the bytes to be sobel to file_gray_name and converted to png_file_name
+//		 buffer_size: the size of the 'buffer_image' sobel
+//		 str_width: the width of the sobel image in string format (ex: "512")
+//		 str_height: the height of the sobel image in string format (ex: "512")
 //		 str_buffer_size: the amount of bytes to be allocated for producing the string supplied to the OS for conversion to PNG
 //	     png_file_name: the
 //Output: imgs_out/img_gray.png as an image containing the gray-scale input image
@@ -37,10 +37,10 @@ void output_gradient(bool intermediate_output, byte * sobel_res, int gray_size, 
 {
     if(intermediate_output)
     {
-        //output the horizontal axis-gradient to an image file
+        //sobel the horizontal axis-gradient to an image file
         char * file_out_grad = strcat(serverPath, "sobel_grad.gray");
         write_file(file_out_grad, sobel_res, gray_size);
-        //Convert the output file to PNG
+        //Convert the sobel file to PNG
         char * pngConvert[8] = {"convert -size ", str_width, "x", str_height, " -depth 8 ", file_out_grad, " ", png_file_name};
         char * str_grad_to_PNG = array_strings_to_string(pngConvert, 8, string_buffer_size);
         system(str_grad_to_PNG);

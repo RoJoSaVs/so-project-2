@@ -17,13 +17,15 @@
 #include <semaphore.h>
 #include <fcntl.h>
 
+#include "serversUtil.h"
+
 #define PORT 25565
 
 int static semaphore = 1;
 
 void sobelFilter(char fileName[30])
 {
-    char command[100] = "./output/sobel ";
+    char command[100] = "./sobel/sobel ";
     strcat(command, fileName);
     strcat(command, " ");
     strcat(command, fileName);
@@ -54,7 +56,7 @@ void *handleConnection(void *arg)
     while(1){
         // Rojo = 0, Verde = 1
         if (!semaphore){
-            sleep(2);
+            sleep(3);
         }
         else{
             semaphore = 0;
@@ -84,19 +86,10 @@ int main(int argc, char *argv[])
     int addrlen = sizeof(address);
 
     printf("Creating socket...\n");
-    // Creating socket file descriptor
-    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
-        perror("socket failed");
-        exit(EXIT_FAILURE);
-    }
+    validateSocketCreation(&server_fd);
 
     printf("Setting socket...\n");
-    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)))
-    {
-        perror("setsockopt");
-        exit(EXIT_FAILURE);
-    }
+    validateSocketSetting(&server_fd, &opt);
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;

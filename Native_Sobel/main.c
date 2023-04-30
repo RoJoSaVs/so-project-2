@@ -22,15 +22,15 @@ typedef unsigned char byte;
 //used to track start and end time
 #define get_time(time) (gettimeofday(&time, NULL))
 
-//false --> No vertical gradient and horizontal gradient are output
-//true --> Vertical gradient and horizontal gradient are output
+//false --> No vertical gradient and horizontal gradient are sobel
+//true --> Vertical gradient and horizontal gradient are sobel
 #define INTERMEDIATE_OUTPUT false
 
 int main(int argc, char** argv)
 {
     if (argc < 2)
     {
-        printf("You did not provide any input image name and thread. Usage: output [input_image_name] . \n");
+        printf("You did not provide any input image name and thread. Usage: sobel [input_image_name] . \n");
         return -2;
     }
 

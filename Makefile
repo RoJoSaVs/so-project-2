@@ -1,8 +1,8 @@
 all: build
 
 build: # Compile all files needed to run the project
-	# gcc code/sharedObjectsInit.c -o output/sharedObjectsInit
-	# ./output/sharedObjectsInit
+	# gcc code/sharedObjectsInit.c -o sobel/sharedObjectsInit
+	# ./sobel/sharedObjectsInit
 	gcc Native_Sobel/file_operations.c Native_Sobel/image_operations.c Native_Sobel/main.c -lm -o output/sobel # Sobel filter
 
 	clear
@@ -15,15 +15,15 @@ build: # Compile all files needed to run the project
 client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
-	#./output/client $(ip) $(port) $(image) $(threads) $(loops)
+	#./sobel/client $(ip) $(port) $(image) $(threads) $(loops)
 	./output/client 127.0.0.1 25565 itachi.jpg 500 1
-	#./output/client 0.0.0.0 1100 itachi.jpg 1 2
+	#./sobel/client 0.0.0.0 1100 itachi.jpg 1 2
 
 
 server:
 	# clear
-	# gcc code/serverTest.c -o output/serverTest
-	# ./output/serverTest
+	# gcc code/serverTest.c -o sobel/serverTest
+	# ./sobel/serverTest
 	clear
 	gcc code/Servidor_secu.c -o output/Servidor_secu
 	./output/Servidor_secu 0
@@ -44,8 +44,8 @@ thread_server:
 
 visualizer:
 	clear
-	# gcc code/visualizer.c -o output/visualizer
-	# ./output/visualizer
+	# gcc code/visualizer.c -o sobel/visualizer
+	# ./sobel/visualizer
 	python3 code/visualizer.py
 
 
