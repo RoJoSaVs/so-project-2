@@ -14,8 +14,8 @@ build: # Compile all files needed to run the project
 client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
-	./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	#./output/client 127.0.0.1 25565 itachi.jpg 1 2
+	#./output/client $(ip) $(port) $(image) $(threads) $(loops)
+	./output/client 127.0.0.1 25565 itachi.jpg 500 1
 	#./output/client 0.0.0.0 1100 itachi.jpg 1 2
 
 
@@ -35,6 +35,10 @@ heavy:
 
 server_secu:
 	./output/Servidor_secu 2
+
+thread_server:
+	gcc code/threadServer.c -o output/threadServer
+	./output/threadServer
 
 
 visualizer:
@@ -56,12 +60,12 @@ sobel: #Compile files needed to apply sobel filter
 
 reset:
 	rm output/*
+	rm files/threads/*
 	rm image.rgb
 	rm sobel_countour.gray
 	rm sobel_grad.gray
 	# rm files/fifo/*
 	# rm files/heavy/*
-	# rm files/threads/*
 	# rm files/preheavy/*
 	clear
 
