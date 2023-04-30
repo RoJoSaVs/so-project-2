@@ -138,6 +138,10 @@ int main(int argc, char *argv[])
                 exit(0);
             }
 
+            //---------------- Measure time request execution ------------------//
+            struct timeval tval_beforeReq, tval_afterReq, tval_resultReq;
+            gettimeofday(&tval_beforeReq, NULL); // Start timer
+
             while(!feof(pictureFile)){ // Send picture from client side
                 fread(buffer, sizeof(char), 1, pictureFile);
                 if(send(client_fd, buffer, 1, 0) == -1)
@@ -155,6 +159,15 @@ int main(int argc, char *argv[])
 
             char response[1024]; // Read message from server side
             valread = read(client_fd, response, 1024);
+
+            // Finish timer
+            gettimeofday(&tval_afterReq, NULL);
+            timersub(&tval_afterReq, &tval_beforeReq, &tval_resultReq);
+            double timeExecutionReq = (double)tval_resultReq.tv_sec + ((double)tval_resultReq.tv_usec) / CLOCKS_PER_SEC;
+
+            // Semaphore for time per request stat
+            save("files/timeRequest.json", response, loops + 1, timeExecutionReq, 0, 0, byteCounter);
+
 
             bold_green();
             printf("\n---------------------------------------------------------------------\n");
@@ -174,7 +187,7 @@ int main(int argc, char *argv[])
         double timeExecution = (double)tval_result.tv_sec + ((double)tval_result.tv_usec) / CLOCKS_PER_SEC;
 
         // Sem Stats
-        save(serverName, totalRequest, timeExecution, 0, 0, byteCounter);
+        save("files/stats.json", serverName, totalRequest, timeExecution, 0, 0, byteCounter);
         
         
     }

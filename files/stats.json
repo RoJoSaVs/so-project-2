@@ -1,70 +1,252 @@
 [{
-		"server":	"heavy",
+		"server":	"heavy",
+		"totalRequest":	10,
+		"timeExecution":	5.003202,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	3314730
+	}, {
+		"server":	"heavy",
 		"totalRequest":	5,
-		"timeExecution":	1.687125,
+		"timeExecution":	1.751188,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	1,
+		"timeExecution":	0.522549,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	331473
+	}, {
+		"server":	"heavy",
+		"totalRequest":	4,
+		"timeExecution":	1.77361,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1325892
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	2.634109,
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365
 	}, {
 		"server":	"heavy",
 		"totalRequest":	5,
-		"timeExecution":	1.680255,
-		"averageRequestTime":	0,
-		"memoryConsumption":	0,
-		"totalBytesSend":	1657365
-	}, {
-		"server":	"heavy",
-		"totalRequest":	5,
-		"timeExecution":	1.672556,
+		"timeExecution":	2.438966,
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365
 	}, {
 		"server":	"heavy",
 		"totalRequest":	5,
-		"timeExecution":	1.69991,
-		"averageRequestTime":	0,
-		"memoryConsumption":	0,
-		"totalBytesSend":	1657365
-	}, {
-		"server":	"heavy",
-		"totalRequest":	5,
-		"timeExecution":	1.65693,
-		"averageRequestTime":	0,
-		"memoryConsumption":	0,
-		"totalBytesSend":	1657365
-	}, {
-		"server":	"heavy",
-		"totalRequest":	5,
-		"timeExecution":	1.706706,
+		"timeExecution":	1.676976,
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365
 	}, {
 		"server":	"heavy",
 		"totalRequest":	5,
-		"timeExecution":	1.702116,
-		"averageRequestTime":	0,
-		"memoryConsumption":	0,
-		"totalBytesSend":	1657365
-	}, {
-		"server":	"heavy",
-		"totalRequest":	5,
-		"timeExecution":	1.716867,
-		"averageRequestTime":	0,
-		"memoryConsumption":	0,
-		"totalBytesSend":	1657365
-	}, {
-		"server":	"heavy",
-		"totalRequest":	5,
-		"timeExecution":	1.667378,
+		"timeExecution":	1.676976,
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365
 	}, {
 		"server":	"heavy",
 		"totalRequest":	5,
-		"timeExecution":	1.659797,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"heavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"fifo",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"preheavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"fifo",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"fifo",
+		"totalRequest":	1,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"fifo",
+		"totalRequest":	4,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"fifo",
+		"totalRequest":	8,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"preheavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"preheavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"preheavy",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	1657365
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	1.676976,
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	1657365

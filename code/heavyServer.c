@@ -41,10 +41,10 @@ void sobelFilter(char fileName[30], int index)
 	strcat(command, fileName);
 	strcat(command, " files/heavy/");
 	
-	char snum[5];
-	sprintf(snum, "%d", index);
-
-	strcat(command, snum);
+	// char snum[5];
+	// sprintf(snum, "%d", index);
+	// strcat(command, snum);
+	
 	system(command);
 }
 
@@ -130,7 +130,7 @@ void runServer(int index)
 
 int main(int argc, char const* argv[])
 {
-	int totalPictures = 7;
+	int totalPictures = 20;
 	for(int counter = 1; counter <= totalPictures; counter++)
 	{
 		runServer(counter);

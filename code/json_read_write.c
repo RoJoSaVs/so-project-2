@@ -6,11 +6,11 @@ cJSON *root;
 FILE *archivo;
 char nombre_archivo[100];
 
-int jsonRead(){
+int jsonRead(char *filename){
     // Leer el archivo JSON
     
 
-    archivo = fopen("files/stats.json", "r");
+    archivo = fopen(filename, "r");
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo.\n");
@@ -56,7 +56,7 @@ int jsonRead(){
     return 0; 
 }
 
-int jsonWrite(char const * name,int totalrequest, double timeExecution,int averageRequestTime, int memoryConsumption, int totalBytesSend){
+int jsonWrite(char *filename, char const * name,int totalrequest, double timeExecution,int averageRequestTime, int memoryConsumption, int totalBytesSend){
      // Crear los objetos JSON
     cJSON *obj1 = cJSON_CreateObject();
     cJSON *arr = cJSON_CreateArray();
@@ -73,7 +73,7 @@ int jsonWrite(char const * name,int totalrequest, double timeExecution,int avera
 
     // Escribir el archivo JSON
 
-    archivo = fopen("files/stats.json", "w");
+    archivo = fopen(filename, "w");
 
     if (archivo == NULL) {
         printf("No se pudo abrir el archivo.\n");
@@ -86,10 +86,10 @@ int jsonWrite(char const * name,int totalrequest, double timeExecution,int avera
     return 0;
 }
 
-int save(char const * name, int totalrequest, double timeExecution, int averageRequestTime, int memoryConsumption, int totalBytesSend){
+int save(char *filename, char const * name, int totalrequest, double timeExecution, int averageRequestTime, int memoryConsumption, int totalBytesSend){
     
-    int readRes = jsonRead();
-    int writeRes = jsonWrite(name, totalrequest, timeExecution, averageRequestTime, memoryConsumption, totalBytesSend);
+    int readRes = jsonRead(filename);
+    int writeRes = jsonWrite(filename, name, totalrequest, timeExecution, averageRequestTime, memoryConsumption, totalBytesSend);
     return 0;
 }
 
