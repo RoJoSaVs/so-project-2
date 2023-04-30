@@ -53,9 +53,13 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		sprintf(indexName, "%d", index);
 		strcat(fileName, indexName);
 		strcat(fileName, extension);
-		file = fopen(fileName, "wb");
+
 
 		send(new_socket, response, strlen(response), 0);
+
+        // guardar en directorio
+        // down
+        file = fopen(fileName, "wb");
 
 		while((received = recv(new_socket, buffer, 1, 0)) > 0) // Receive the whole file
 		{
@@ -63,6 +67,7 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		}
 
 		fclose(file);
+        // up
 
 		sobelFilter(fileName); // Process Picture
 	}
