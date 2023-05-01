@@ -67,6 +67,14 @@ void *handleConnection(void *arg)
         pthread_mutex_lock(&semaphoreWriteRec);
         fwrite(buffer, sizeof(char), 1, file);
         pthread_mutex_unlock(&semaphoreWriteRec);
+        /*
+         *pthread_mutex_lock(&semaphoreWriteRec);
+        bufferId = buffer[:8];
+        bufferIMG = buffer[:...];
+        fopen("files/threads/" + bufferId)
+        fwrite(bufferImg, sizeof(char), 1, file);
+        pthread_mutex_unlock(&semaphoreWriteRec);
+         */
     }
 
     fclose(file);

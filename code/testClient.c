@@ -118,6 +118,7 @@ void *sendImages(void *args){
         char buffer[1];
         while(!feof(pictureFile)){ // Send picture from client side
             fread(buffer, sizeof(char), 1, pictureFile);
+            //int sentResult =  send(client_fd, bufferID + bufferImg, 1, 0);
             int sentResult =  send(client_fd, buffer, 1, 0);
             if (sentResult  < 0)
             {
