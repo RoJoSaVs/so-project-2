@@ -85,6 +85,8 @@ int main(int argc, char *argv[])
             struct sockaddr_in serv_addr;
             char buffer[1];
 
+            memset(buffer, 0, strlen(buffer));
+
             FILE *pictureFile;
 
             pictureFile = fopen(argv[3], "rb"); // Load the file image to send
@@ -154,6 +156,9 @@ int main(int argc, char *argv[])
             }
 
             char response[1024]; // Read message from server side
+
+            memset(response, 0, strlen(response));
+
             valread = read(client_fd, response, 1024);
 
             bold_green();
@@ -164,7 +169,8 @@ int main(int argc, char *argv[])
             printf("---------------------------------------------------------------------\n");
             reset();
             strcpy(serverName, response);
-        
+
+
             close(client_fd); // closing the connected socket
         }
 

@@ -26,7 +26,7 @@ sem_t my_semaphore;
 
 void sobelFilter(char fileName[30])
 {
-    char command[100] = "./sobel/sobel ";
+    char command[100] = "./output/sobel ";
     strcat(command, fileName);
     strcat(command, " ");
     strcat(command, fileName);
@@ -44,6 +44,8 @@ void *handleConnection(void *arg)
     char *response = "OK";
     send(new_socket, response, strlen(response), 0);
 
+    memset(buffer, 0, strlen(buffer));
+
     FILE *file;
     char indexName[20];
     char extension[20] = ".jpg";
@@ -54,12 +56,9 @@ void *handleConnection(void *arg)
     file = fopen(fileName, "wb");
 
 
-    while(1){
-        // Rojo = 0, Verde = 1
+    while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
         sem_wait(&my_semaphore);
-        while ((received = recv(new_socket, buffer, 1, 0)) > 0) {
-            fwrite(buffer, sizeof(char), 1, file);
-        }
+        fwrite(buffer, sizeof(char), 1, file);
         sem_post(&my_semaphore);
         sleep(3);
     }
@@ -104,13 +103,13 @@ int main(int argc, char *argv[])
 
     while (1)
     {
-        serverIndex++;
         printf("%d, Client connected\n", serverIndex);
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
         {
             perror("accept");
             exit(EXIT_FAILURE);
         }
+        serverIndex++;
 
        pthread_t thread_id;
         if (pthread_create(&thread_id, NULL, handleConnection, (void *)&new_socket) < 0)

@@ -110,4 +110,46 @@
 		"averageRequestTime":	0,
 		"memoryConsumption":	0,
 		"totalBytesSend":	165736500
+	}, {
+		"server":	"OK»Ï\\",
+		"totalRequest":	50,
+		"timeExecution":	4.886225,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OKÌa„",
+		"totalRequest":	50,
+		"timeExecution":	4.781274,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OK\u0019$Ù",
+		"totalRequest":	50,
+		"timeExecution":	4.789187,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OK",
+		"totalRequest":	50,
+		"timeExecution":	4.586069,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OK",
+		"totalRequest":	50,
+		"timeExecution":	4.424086,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
+	}, {
+		"server":	"OK",
+		"totalRequest":	50,
+		"timeExecution":	4.456183,
+		"averageRequestTime":	0,
+		"memoryConsumption":	0,
+		"totalBytesSend":	16573650
 	}]
