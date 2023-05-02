@@ -20,7 +20,7 @@ client: reset sobel init # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
 	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	./output/client 127.0.0.1 25565 files/img/itachi.jpg 5 1
+	./output/client 127.0.0.1 25565 files/img/itachi.jpg 50 1
 
 
 server:
@@ -35,6 +35,11 @@ heavy:
 	clear
 	gcc code/heavyServer.c -o output/heavyServer
 	./output/heavyServer
+
+testClient: reset sobel init # -lpthread: Require to use threads
+	clear
+	gcc code/testClient.c -o output/testClient -lpthread -lrt
+	./output/testClient 127.0.0.1 25565 files/img/itachi.jpg 50 1
 
 thread_server:
 	gcc code/threadServer.c -o output/threadServer

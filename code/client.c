@@ -194,7 +194,6 @@ int main(int argc, char *argv[])
 
             // Semaphore for time per request stat
             sem_wait(loopSemStats);
-            printf("Post wait\n");
 
             save("files/timeRequest.json", serverNameReceived, loops + 1, timeExecutionReq, 0, memoryUsage, byteCounter);
             sem_post(loopSemStats);
