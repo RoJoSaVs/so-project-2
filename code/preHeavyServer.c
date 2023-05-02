@@ -6,7 +6,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <signal.h>
-#include "colorConf.c"
 #include <semaphore.h>
 #include <fcntl.h>
 #include <ncurses.h>
@@ -58,16 +57,6 @@ int shared_process_fd;
 
 SharedMemory *sharedMemory; //globales para el proceso
 SharedProcess *processArray;
-
-void errorMsg(){
-    yellow();
-    printf("--------------------------------------------------------\n");
-    cyan();
-    printf("Please insert the number of processes for the server. \n");
-    yellow();
-    printf("--------------------------------------------------------\n");
-}
-
 
 
 void sobelFilter(char fileName[30])
@@ -132,7 +121,12 @@ void emergencyExit(){//Child process waiting for an interuption
         initscr();
     cbreak();
     noecho();*/
+
+
+
     while (1) {
+
+        
         // Capturar la tecla presionada
         int ch = getch();
 
@@ -167,7 +161,7 @@ void emergencyExit(){//Child process waiting for an interuption
 }
 
 
-
+/*
 int openSocket(int i){
     // ================================================================================= //
     // Create socket 
@@ -202,6 +196,17 @@ int openSocket(int i){
     return socket_child;
 
 }
+*/
+void enviarConfirmacion(int SocketFD){
+     char mensaje[80] = "Paquete Recibido";
+    //char mensaje[5] = "prehe";
+    int lenMensaje = strlen(mensaje);
+    if(write(SocketFD,mensaje,sizeof(mensaje)) == -1)
+            perror("Error al enviar la confirmación:");
+    printf("Confirmación enviada\n");
+
+}//End enviarConfirmacion
+
 
 void createServerChild(int i, int numProcess){
     (processArray[i]).pid = getpid();
@@ -214,11 +219,11 @@ void createServerChild(int i, int numProcess){
 
         FILE *file;
         char* response = "preheavy";
-        char buffer[1024];
+        char buffer[1];
 
         char indexName[30];
-        char extension[30] = ".jpg";
-        char fileName[30] = "files/preheavy/received";
+        char extension[30] = ".png";
+        char fileName[30] = "files/preheavy/nuevoArchivote";
         sprintf(indexName, "%d", (processArray[i]).workIndex);
         strcat(fileName, indexName);
         strcat(fileName, extension);
@@ -229,7 +234,7 @@ void createServerChild(int i, int numProcess){
         sem_wait(semRequest);
          
         processArray[i].readyToProcess = 1;
-        printf("Pid: %d, i: %d, ready to get assigned, %d\n", processArray[i].pid, i, processArray[i].readyToProcess);
+        printf("Child -- %d -- %d ---------------- Ready for assignament ----\n", processArray[i].pid, processArray[i].child_port);
         
         sem_post(semProcess);
         sem_wait(semShared); //Permite que todos esperen un request, solo el que pasa el semáforo se postea como listo
@@ -239,25 +244,28 @@ void createServerChild(int i, int numProcess){
             sem_post(semRequest);
             sem_post(semShared);
             fclose(file);
-            printf("child %d exit\n", i);
             break;
         }
         printf("Child -- %d -- %d ----------------- Processing request by socket %d ----\n", processArray[i].pid, processArray[i].child_port, processArray[i].socket_client);
         
-        int bytes_received;
-        while ((bytes_received = recv(processArray[i].socket_client, buffer, 1040, 0)) > 0) {
-            fwrite(buffer, sizeof(char), bytes_received, file);
-        }
-
+       
+        enviarConfirmacion(processArray[i].socket_client);
         
+        int bytes_received = -1;
+
+        while ((bytes_received = recv(processArray[i].socket_client, buffer, 1, 0)) > 0) {
+
+            fwrite(buffer, sizeof(char), 1, file);
+        }
+     
         fclose(file);
+        
+        close(processArray[i].socket_client);
 
         //sobelFilter(fileName); // Process Picture
 
-        
 
-        printf("Child -- %d -- %d ----------------- Image processed ----\n", processArray[i].pid, processArray[i].child_port);
-    
+        printf("Child -- %d -- %d ----------------- Image processed ----\n", processArray[i].pid, processArray[i].child_port); 
     
     }
     //close(socket_child);
@@ -273,7 +281,7 @@ void createServerChild(int i, int numProcess){
 int main(int argc, char const *argv[]){
     
     if(argc != 2){
-        errorMsg();
+        printf("Error de parámetros, ingrese la cantidad de procesos deseada\n");
         exit(1);
     }
     //=====================================================================================
@@ -338,13 +346,6 @@ int main(int argc, char const *argv[]){
         printf("Error al crear semáforo: %s\n", strerror(errno));
     } 
 
-    int value1;
-    int value2;
-    int value3;
-    sem_getvalue(semProcess, &value1);
-    sem_getvalue(semRequest, &value2);
-    sem_getvalue(semShared, &value3);
-    printf("El valor actual del semáforo es %d, %d, %d\n", value1, value2, value3);
     //===================================================================================//
     // Child process por manual interruption 
     /*pid_t pid = fork();
@@ -362,8 +363,8 @@ int main(int argc, char const *argv[]){
     int addrlen = sizeof(address);
 
 
-    address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_family = AF_INET;
     address.sin_port = htons(PORT);
 
     // Creating socket file descriptor
@@ -416,11 +417,35 @@ int main(int argc, char const *argv[]){
     {
         // Parent process waits for incoming connections and assigns them to the waiting child processes
         int totalPictures = 5;
-        int progressCounter = 1;
-        int socket_client;
+        int progressCounter = 0;
         
+        struct sockaddr_in clSockAddr;
+	    int SocketClientFD;
+	    int clientLen;
+        clientLen = sizeof(clSockAddr);
+        
+        int flags = fcntl(STDIN_FILENO, F_GETFL, 0);
+        fcntl(STDIN_FILENO, F_SETFL, flags | O_NONBLOCK);
         while (!(sharedMemory)->endSignal) //Parent process main loop
         {
+
+            fd_set readfds;
+            FD_ZERO(&readfds);
+            FD_SET(socket_father, &readfds);
+            FD_SET(STDIN_FILENO, &readfds);
+            
+            if (select(socket_father + 1, &readfds, NULL, NULL, NULL) == -1) {
+                perror("Error en select");
+                exit(EXIT_FAILURE);
+            }
+            // Verificar si se ha presionado una tecla
+            if (FD_ISSET(STDIN_FILENO, &readfds)) {
+                printf("Se ha presionado una tecla. Cerrando el servidor...\n");
+                sharedMemory->endSignal=1;
+                sem_post(semShared);
+                break;
+            }
+
             if(progressCounter == totalPictures){
                 sem_wait(semShared);
                 sharedMemory->endSignal=1;
@@ -429,37 +454,36 @@ int main(int argc, char const *argv[]){
                 break;
             }
             
-            sem_getvalue(semProcess, &value1);
-            sem_getvalue(semRequest, &value2);
-            sem_getvalue(semShared, &value3);
-            printf("El valor actual del semáforo es %d, %d, %d, esperando process\n", value1, value2, value3);
             printf("Main ---- 0 ---- %d ----------------- Awaiting new request ----\n", PORT);            
-            socket_client = accept(socket_father, (struct sockaddr *)&address, (socklen_t *)&addrlen);
-            if (socket_client < 0)
+            SocketClientFD = accept(socket_father, (struct sockaddr *)&clSockAddr, &clientLen);
+            
+            if (SocketClientFD < 0)
             {
                 perror("accept");
                 exit(EXIT_FAILURE);
             }
-            
+           
+            clSockAddr.sin_family = AF_INET;
+            clSockAddr.sin_port = htons(PORT);
+
             sem_post(semRequest);
 
-            printf("\n\nMain ---- 0 ---- %d ----------------- Assigning process for socket %d ----\n", PORT, socket_client);            
+            printf("\n\nMain ---- 0 ---- %d ----------------- Assigning process for socket %d ----\n", PORT, SocketClientFD);            
 
             sleep(1);
             sem_wait(semProcess);
             
             for(int i = 0; i < numProcess; i++){
-                printf("searching available process...%d\n", processArray[i].readyToProcess);
                 if((processArray[i]).readyToProcess){
-                    (processArray[i]).socket_client = socket_client;
+                    (processArray[i]).socket_client = SocketClientFD;
                     (processArray[i]).workIndex = progressCounter;
-                    printf("Main ----- 0 ---- %d ----------------- Posted request made by socket %d ---- \n", PORT, socket_client);
-                    printf("Main ----- 0 ---- %d ----------------- Request assigned to Child %d, %d ----\n", PORT, processArray[i].pid, i);
+                    
+                    printf("Main ----- 0 ---- %d ----------------- Request assigned to Child %d for socket %d ----\n", PORT, processArray[i].pid, processArray[i].socket_client);
                     progressCounter++;
                     sem_post(semShared);
                     break;
                 }
-            }           
+            }
         
         }
         // Closing server socket
@@ -482,7 +506,7 @@ int main(int argc, char const *argv[]){
                 }
             }
         }
-        close(socket_client);
+        close(SocketClientFD);
         close(socket_father);
 
 
