@@ -27,7 +27,7 @@
     <list default="true" id="c534e7b5-953e-472d-8c01-dcf2937d6596" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/visualizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/code/visualizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/timeRequest.json" beforeDir="false" afterPath="$PROJECT_DIR$/files/timeRequest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/stats.json" beforeDir="false" afterPath="$PROJECT_DIR$/files/stats.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
