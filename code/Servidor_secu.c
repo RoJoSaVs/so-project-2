@@ -1,12 +1,4 @@
-/*
-* Author: Pablo Camarillo Ramírez.
-* Fecha/Date: 28 de Septiembre de 2010/September 28th 2010.
-* Redes de Computadora / Computer networks.
-* Description: 	This application contains the server functionality
-* 		to send/receive files through C-like sockets by using
-*		TCP/UDP packages.
-*/
- 
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -40,6 +32,7 @@ void sobelFilter(char fileName[30])
 	strcat(command, fileName);
 	strcat(command, " ");
 	strcat(command, fileName);
+	strcat(command, " files/fifo/");
 
 	system(command);
 }
@@ -164,7 +157,7 @@ void recibirArchivo(int SocketFD, FILE *file,int index2){
 	strcat(fileName, extension);
 	file = fopen(fileName, "wb");
 	enviarConfirmacion(SocketFD);
-	enviarMD5SUM(SocketFD);
+	// enviarMD5SUM(SocketFD);
 	while((recibido = recv(SocketFD, buffer, BUFFSIZE, 0)) > 0){
 		//printf("%s",buffer);
 		fwrite(buffer,sizeof(char),1,file);
@@ -176,7 +169,8 @@ void recibirArchivo(int SocketFD, FILE *file,int index2){
 }//End recibirArchivo procedure
 
 void enviarConfirmacion(int SocketFD){
-	char mensaje[80] = "Paquete Recibido";
+	// char mensaje[80] = "Paquete Recibido";
+	char mensaje[5] = "fifo1";
 	int lenMensaje = strlen(mensaje);
 	printf("\nConfirmación enviada\n");
 	if(write(SocketFD,mensaje,sizeof(mensaje)) == ERROR)
