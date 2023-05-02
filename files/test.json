@@ -1,0 +1,17 @@
+
+// HEAVY
+
+// dictionary["data"]["heavyDict"]
+[{
+  "totalRequest":	1,
+  "timeExecution":	0.325026
+}, {
+  "totalRequest":	2,
+  "timeExecution":	0.341672
+}, {
+  "totalRequest":	3,
+  "timeExecution":	0.335137
+}, {
+  "totalRequest":	4,
+  "timeExecution":	0.334891
+}]

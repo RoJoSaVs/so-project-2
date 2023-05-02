@@ -65,26 +65,36 @@ def getStats(filename):
     return resultDict
 
 
-def setGraphData(dict, axs):
-    axs[dict["posX"], dict["posY"]].plot(dict["x"], dict["y"])
-    axs[dict["posX"], dict["posY"]].plot(dict["data"]["fifoDict"][dict["xValues"]], dict["data"]["fifoDict"][dict["yValues"]],
-                                         'og')  # fifo
-    axs[dict["posX"], dict["posY"]].plot(dict["data"]["heavyDict"][dict["xValues"]], dict["data"]["heavyDict"][dict["yValues"]],
-                                         'ob')  # heavy
-    axs[dict["posX"], dict["posY"]].plot(dict["data"]["threadDict"][dict["xValues"]], dict["data"]["threadDict"][dict["yValues"]],
-                                         'oc')  # thread
-    axs[dict["posX"], dict["posY"]].plot(dict["data"]["preheavyDict"][dict["xValues"]], dict["data"]["preheavyDict"][dict["yValues"]],
-                                         'oy')  # preheavy
-    axs[dict["posX"], dict["posY"]].set_title(dict["title"])
-    axs[dict["posX"], dict["posY"]].legend(['FIFO', 'Heavy', 'Thread', 'Pre-Heavy'],
-                                           loc='upper right')  # set the position of the legend
-    axs[dict["posX"], dict["posY"]].set(xlabel=dict["xLabel"], ylabel=dict["yLabel"])
+def setGraphData(dictionary, axs, xValues, yValues):
+
+    legends = ['FIFO', 'Heavy', 'Thread', 'Pre-Heavy']
+    fifoXValues = dictionary["data"]["fifoDict"][xValues]
+    fifoYValues = dictionary["data"]["fifoDict"][yValues]
+
+    heavyXValues = dictionary["data"]["heavyDict"][xValues]
+    heavyYValues = dictionary["data"]["heavyDict"][yValues]
+
+    threadXValues = dictionary["data"]["threadDict"][xValues]
+    threadYValues = dictionary["data"]["threadDict"][yValues]
+
+    preheavyXValues = dictionary["data"]["preheavyDict"][xValues]
+    preheavyYValues = dictionary["data"]["preheavyDict"][yValues]
+
+    axs[dictionary["posX"], dictionary["posY"]].plot(fifoXValues, fifoYValues, 'c')
+    axs[dictionary["posX"], dictionary["posY"]].plot(heavyXValues, heavyYValues, 'b')
+    axs[dictionary["posX"], dictionary["posY"]].plot(threadXValues, threadYValues, 'g')
+    axs[dictionary["posX"], dictionary["posY"]].plot(preheavyXValues, preheavyYValues, 'r')
+
+    axs[dictionary["posX"], dictionary["posY"]].set_title(dictionary["title"])
+    axs[dictionary["posX"], dictionary["posY"]].legend(legends, loc='upper right')  # set the position of the legend
+    axs[dictionary["posX"], dictionary["posY"]].set(xlabel=dictionary["xLabel"], ylabel=dictionary["yLabel"])
 
 
 def drawStats():
     # ylabelValue = ["Time Execution", "Average Request Time", "Memory Consumption", "Bandwidth"]
     timeRequest = getStats("./files/timeRequest.json")  # Incremental stats
     stats = getStats("./files/stats.json")  # Average Stats file
+
 
     x = 100
     y = 100
@@ -102,24 +112,24 @@ def drawStats():
                   "xLabel": "Memory Consumption", "yLabel": "Total Request",
                   "xValues": "memoryConsumption",
                   "yValues": "totalRequest",
-                  "data": stats}
+                  "data": timeRequest}
     graph3Dict = {"posX": 1, "posY": 0, "x": x, "y": y ** 2,
                   "title": "Average Execution Time vs Request",
                   "xLabel": "Average Time Execution", "yLabel": "Total Request",
                   "xValues": "averageRequestTime",
                   "yValues": "totalRequest",
-                  "data": stats}
+                  "data": timeRequest}
     graph4Dict = {"posX": 1, "posY": 1, "x": x + 2, "y": y + 2,
                   "title": "Data Transfer Speed",
                   "xLabel": "timeExecution", "yLabel": "totalBytesSend",
                   "xValues": "timeExecution",
                   "yValues": "totalBytesSend",
-                  "data": stats}
+                  "data": timeRequest}
 
-    setGraphData(graph1Dict, axs)
-    setGraphData(graph2Dict, axs)
-    setGraphData(graph3Dict, axs)
-    setGraphData(graph4Dict, axs)
+    setGraphData(graph1Dict, axs, graph1Dict["xValues"], graph1Dict["yValues"])
+    setGraphData(graph2Dict, axs, graph2Dict["xValues"], graph2Dict["yValues"])
+    setGraphData(graph3Dict, axs, graph3Dict["xValues"], graph3Dict["yValues"])
+    setGraphData(graph4Dict, axs, graph4Dict["xValues"], graph4Dict["yValues"])
 
     fig.tight_layout()
     plt.show()
