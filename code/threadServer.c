@@ -40,18 +40,29 @@ void sobelFilter(char fileName[30])
     system(command);
 }
 
+int getMemoryUsage() {
+    struct rusage usage;
+    if (getrusage(RUSAGE_SELF, &usage) == 0) {
+        return usage.ru_maxrss;
+    }
+}
+
 void *handleConnection(void *arg)
 {
     int new_socket = *((int *)arg);
     char buffer[1];
     int received = -1;
 
-    struct rusage usage;
+    int memoryUsage = getMemoryUsage();
 
-    char *response = "thread";
-    send(new_socket, response, strlen(response), 0);
+    char response[1024];
+
+    sprintf(response, "[thread, %d]", memoryUsage);
 
     memset(buffer, 0, strlen(buffer));
+
+    send(new_socket, response, strlen(response), 0);
+
 
     FILE *file;
     char indexName[20];
@@ -72,15 +83,11 @@ void *handleConnection(void *arg)
         transferredBytes += received;
         sem_post(&my_semaphore);
     }
+
     // Finish timer
     gettimeofday(&tval_after, NULL);
     timersub(&tval_after, &tval_before, &tval_result);
     timeExecution = (double)tval_result.tv_sec + ((double)tval_result.tv_usec) / CLOCKS_PER_SEC;
-
-    printf("Time elapsed: %f seconds\n", timeExecution);
-
-
-    //printf("Size of buffer: %d\n", transferredBytes);
 
     fclose(file);
 
@@ -122,12 +129,12 @@ int main(int argc, char *argv[])
 
     while (1)
     {
-        printf("%d, Client connected\n", serverIndex);
         if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0)
         {
             perror("accept");
             exit(EXIT_FAILURE);
         }
+        printf("%d, Client connected\n", serverIndex);
         serverIndex++;
 
        pthread_t thread_id;
