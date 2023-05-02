@@ -73,7 +73,6 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 	if(getpid() != mainProcessPid)
 	{
 		FILE *file;
-//		char response[5] = "heavy";
 		char buffer[1];
 		int received = -1;
 
@@ -84,9 +83,6 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		strcat(fileName, indexName);
 		strcat(fileName, extension);
 		file = fopen(fileName, "wb");
-//
-//		// Get memory consumption by server
-//		getMemoryConsumption();
 
         int memoryUsage = getMemoryConsumption();
 

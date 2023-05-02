@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/select.h>
+#include <sys/resource.h>
 
 /*Definición de constantes*/
 #define BUFFSIZE 1
@@ -25,6 +26,16 @@ void getIP(int tipo, char * IP);
  * wlan: 1
  * eth0: 2
 */
+
+
+int getMemoryUsage()
+{
+    struct rusage usage;
+    if (getrusage(RUSAGE_SELF, &usage) == 0)
+    {
+        return usage.ru_maxrss;
+    }
+}
 
 void sobelFilter(char fileName[30])
 {
@@ -170,7 +181,15 @@ void recibirArchivo(int SocketFD, FILE *file,int index2){
 
 void enviarConfirmacion(int SocketFD){
 	// char mensaje[80] = "Paquete Recibido";
-	char mensaje[5] = "fifo1";
+
+	int memoryUsage = getMemoryUsage();
+
+    char mensaje[1024];
+
+    sprintf(mensaje, "[fifo, %d]", memoryUsage);
+
+
+	// char mensaje[5] = "fifo1";
 	int lenMensaje = strlen(mensaje);
 	printf("\nConfirmación enviada\n");
 	if(write(SocketFD,mensaje,sizeof(mensaje)) == ERROR)

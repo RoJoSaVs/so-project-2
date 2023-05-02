@@ -22,6 +22,7 @@ client: reset sobel init # -lpthread: Require to use threads
 	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
 	./output/client 127.0.0.1 25565 files/img/itachi.jpg 5 1
 	./output/client 127.0.0.1 8888 files/img/itachi.jpg 5 1
+	./output/client 0.0.0.0 1100 files/img/itachi.jpg 5 1
 
 
 server:
@@ -60,7 +61,7 @@ visualizer:
 	python3 code/visualizer.py
 
 
-init: # Define shared variables for stats
+init sobel: # Define shared variables for stats
 	gcc code/sharedObjectsInit.c -o output/sharedObjectsInit
 	./output/sharedObjectsInit
 
@@ -69,6 +70,8 @@ sobel: #Compile files needed to apply sobel filter
 	clear
 	gcc Native_Sobel/file_operations.c Native_Sobel/image_operations.c Native_Sobel/main.c -lm -o output/sobel
 	./output/sobel files/img/itachi.jpg itachi2.jpg files/heavy/
+	./output/sobel files/img/itachi.jpg itachi2.jpg files/threads/
+
 
 
 reset:
