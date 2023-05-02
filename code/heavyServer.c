@@ -43,12 +43,12 @@ void setSharedMemory()
 	heavyMemory = 0;
 }
 
-void getMemoryConsumption()
+int getMemoryConsumption()
 {
 	struct rusage myUsage;
     getrusage(RUSAGE_SELF, &myUsage);
 	heavyMemory += myUsage.ru_maxrss;
-    // return myUsage.ru_maxrss;
+     return myUsage.ru_maxrss;
 }
 
 
@@ -73,7 +73,7 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 	if(getpid() != mainProcessPid)
 	{
 		FILE *file;
-		char response[5] = "heavy";
+//		char response[5] = "heavy";
 		char buffer[1];
 		int received = -1;
 
@@ -84,11 +84,19 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		strcat(fileName, indexName);
 		strcat(fileName, extension);
 		file = fopen(fileName, "wb");
+//
+//		// Get memory consumption by server
+//		getMemoryConsumption();
 
-		// Get memory consumption by server
-		getMemoryConsumption();
+        int memoryUsage = getMemoryConsumption();
 
-		send(new_socket, response, (strlen(response) - 1), 0);
+        char response[1024];
+
+        sprintf(response, "[heavy, %d]", memoryUsage);
+
+        memset(buffer, 0, strlen(buffer));
+
+        send(new_socket, response, strlen(response), 0);
 
 		while((received = recv(new_socket, buffer, 1, 0)) > 0) // Receive the whole file
 		{

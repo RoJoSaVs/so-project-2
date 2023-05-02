@@ -108,9 +108,9 @@ def drawStats():
 
     graph1Dict = {"posX": 0, "posY": 0, "x": x, "y": y,
                   "title": "Execution Time vs Request",
-                  "xLabel": "Time Execution", "yLabel": "Total Request",
-                  "xValues": "timeExecution",
-                  "yValues": "totalRequest",
+                  "xLabel": "Total Request", "yLabel": "Time Execution",
+                  "xValues": "totalRequest",
+                  "yValues": "timeExecution",
                   "data": timeRequest}
     graph2Dict = {"posX": 0, "posY": 1, "x": x + 1, "y": y + 1,
                   "title": "Memory Consumption vs Request",

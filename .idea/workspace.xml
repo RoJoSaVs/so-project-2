@@ -27,11 +27,10 @@
     <list default="true" id="c534e7b5-953e-472d-8c01-dcf2937d6596" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/client.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/client.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/threads/-1677724096.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/heavyServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/heavyServer.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/threadServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/threadServer.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/files/timeRequest.json" beforeDir="false" afterPath="$PROJECT_DIR$/files/timeRequest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/output/client" beforeDir="false" afterPath="$PROJECT_DIR$/output/client" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/threadServer" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,7 @@
       <recent name="$PROJECT_DIR$/files" />
     </key>
   </component>
-  <component name="RunManager" selected="Makefile Target.client">
+  <component name="RunManager" selected="Makefile Target.visualizer">
     <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="so-project-2" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
@@ -146,8 +145,8 @@
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="init" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="init" workingDirectory="" arguments="">
+    <configuration name="heavy" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="heavy" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
@@ -182,19 +181,19 @@
       <item itemvalue="Makefile Application.sobel" />
       <item itemvalue="Makefile Application.test" />
       <item itemvalue="Makefile Application.visualizer" />
+      <item itemvalue="Makefile Target.heavy" />
       <item itemvalue="Makefile Target.visualizer" />
-      <item itemvalue="Makefile Target.init" />
       <item itemvalue="Makefile Target.client" />
       <item itemvalue="Makefile Target.reset" />
       <item itemvalue="Makefile Target.thread_server" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Makefile Target.visualizer" />
         <item itemvalue="Makefile Target.client" />
         <item itemvalue="Makefile Target.thread_server" />
+        <item itemvalue="Makefile Target.heavy" />
         <item itemvalue="Makefile Target.reset" />
-        <item itemvalue="Makefile Target.visualizer" />
-        <item itemvalue="Makefile Target.init" />
       </list>
     </recent_temporary>
   </component>

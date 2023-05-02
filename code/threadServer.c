@@ -22,7 +22,7 @@
 #include <time.h>
 #include <sys/time.h>
 
-#define PORT 25565
+#define PORT 8888
 
 int static semaphore = 1;
 sem_t my_semaphore;
