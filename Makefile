@@ -16,7 +16,7 @@ port?=25565
 image?=itachi.jpg
 threads?=1
 loops?=5
-client: # -lpthread: Require to use threads
+client: reset sobel init # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
 	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
@@ -78,6 +78,7 @@ reset:
 	rm -f files/heavy/*
 	rm -f files/threads/*
 	rm -f files/preheavy/*
+	echo "[]" > files/timeRequest.json
 	clear
 
 test:

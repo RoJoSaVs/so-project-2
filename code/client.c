@@ -147,7 +147,6 @@ int main(int argc, char *argv[])
                 reset();
                 exit(0);
             }
-            printf("Connection\n");
 
             //---------------- Measure time request execution ------------------//
             struct timeval tval_beforeReq, tval_afterReq, tval_resultReq;
@@ -170,10 +169,8 @@ int main(int argc, char *argv[])
 
             char response[1024]; // Read message from server side
 
-            printf("Pre read\n");
             valread = read(client_fd, response, 1024);
 
-            printf("Post read\n");
             // Parse response string into tokens
             char *token = strtok(response, ", []");
             char *tokens[2];
@@ -195,7 +192,6 @@ int main(int argc, char *argv[])
             timersub(&tval_afterReq, &tval_beforeReq, &tval_resultReq);
             double timeExecutionReq = (double)tval_resultReq.tv_sec + ((double)tval_resultReq.tv_usec) / CLOCKS_PER_SEC;
 
-            printf("Pre save\n");
             // Semaphore for time per request stat
             sem_wait(loopSemStats);
             printf("Post wait\n");
@@ -203,7 +199,6 @@ int main(int argc, char *argv[])
             save("files/timeRequest.json", serverNameReceived, loops + 1, timeExecutionReq, 0, memoryUsage, byteCounter);
             sem_post(loopSemStats);
 
-            printf("Post save\n");
 
             bold_green();
             printf("\n---------------------------------------------------------------------\n");

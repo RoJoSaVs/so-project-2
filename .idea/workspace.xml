@@ -26,10 +26,12 @@
   <component name="ChangeListManager">
     <list default="true" id="c534e7b5-953e-472d-8c01-dcf2937d6596" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/code/client.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/client.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code/threadServer.c" beforeDir="false" afterPath="$PROJECT_DIR$/code/threadServer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/stats.json" beforeDir="false" afterPath="$PROJECT_DIR$/files/stats.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/threads/-1677724096.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/files/timeRequest.json" beforeDir="false" afterPath="$PROJECT_DIR$/files/timeRequest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/client" beforeDir="false" afterPath="$PROJECT_DIR$/output/client" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/threadServer" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,14 +158,14 @@
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="sobel" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="sobel" workingDirectory="" arguments="">
+    <configuration name="thread_server" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="thread_server" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
     </configuration>
-    <configuration name="thread_server" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
-      <makefile filename="$PROJECT_DIR$/Makefile" target="thread_server" workingDirectory="" arguments="">
+    <configuration name="visualizer" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="visualizer" workingDirectory="" arguments="">
         <envs />
       </makefile>
       <method v="2" />
@@ -180,8 +182,8 @@
       <item itemvalue="Makefile Application.sobel" />
       <item itemvalue="Makefile Application.test" />
       <item itemvalue="Makefile Application.visualizer" />
+      <item itemvalue="Makefile Target.visualizer" />
       <item itemvalue="Makefile Target.init" />
-      <item itemvalue="Makefile Target.sobel" />
       <item itemvalue="Makefile Target.client" />
       <item itemvalue="Makefile Target.reset" />
       <item itemvalue="Makefile Target.thread_server" />
@@ -190,9 +192,9 @@
       <list>
         <item itemvalue="Makefile Target.client" />
         <item itemvalue="Makefile Target.thread_server" />
-        <item itemvalue="Makefile Target.init" />
-        <item itemvalue="Makefile Target.sobel" />
         <item itemvalue="Makefile Target.reset" />
+        <item itemvalue="Makefile Target.visualizer" />
+        <item itemvalue="Makefile Target.init" />
       </list>
     </recent_temporary>
   </component>
@@ -210,6 +212,7 @@
       <workItem from="1682825568095" duration="7681000" />
       <workItem from="1682921032301" duration="1059000" />
       <workItem from="1683045062300" duration="7610000" />
+      <workItem from="1683053055749" duration="937000" />
     </task>
     <servers />
   </component>

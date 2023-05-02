@@ -1,15 +1,36 @@
 [{
-		"server":	"heavy",
+		"server":	"thread",
 		"totalRequest":	1,
-		"timeExecution":	0.325026,
+		"timeExecution":	0.087855,
 		"averageRequestTime":	0,
-		"memoryConsumption":	2096,
+		"memoryConsumption":	2880,
 		"totalBytesSend":	331473
 	}, {
-		"server":	"heavy",
+		"server":	"thread",
 		"totalRequest":	2,
-		"timeExecution":	0.341672,
+		"timeExecution":	0.088349,
 		"averageRequestTime":	0,
-		"memoryConsumption":	2096,
+		"memoryConsumption":	2880,
 		"totalBytesSend":	662946
+	}, {
+		"server":	"thread",
+		"totalRequest":	3,
+		"timeExecution":	0.140305,
+		"averageRequestTime":	0,
+		"memoryConsumption":	2880,
+		"totalBytesSend":	994419
+	}, {
+		"server":	"thread",
+		"totalRequest":	4,
+		"timeExecution":	0.089969,
+		"averageRequestTime":	0,
+		"memoryConsumption":	2880,
+		"totalBytesSend":	1325892
+	}, {
+		"server":	"thread",
+		"totalRequest":	5,
+		"timeExecution":	0.131881,
+		"averageRequestTime":	0,
+		"memoryConsumption":	2880,
+		"totalBytesSend":	1657365
 	}]
