@@ -8,13 +8,18 @@
  #include <signal.h>
  #include <sys/resource.h>
 
+#include <semaphore.h>
+
+#include <sys/shm.h>
+#include <sys/mman.h>
+#include <fcntl.h>
 
 //----------------------------------------------------------------//
 //---------------------- Constants Values ------------------------//
 //----------------------------------------------------------------//
 #define PORT 25565
-#define STATS_SEMAPHORE_NAME "statsSemaphore"
-#define SHARED_STATS_MEMORY "sharedStats"
+#define STATS_SEMAPHORE_NAME "heavyStatsSemaphore"
+#define HEAVY_MEMORY_STAT "heavyMemoryStats"
 
 int server_fd;
 int new_socket;
@@ -23,13 +28,27 @@ struct sockaddr_in address;
 int opt = 1;
 int addrlen = sizeof(address);
 
-// sem_t *semStats;
-// struct statsStruct *stats;
+void *heavyMemory;
 //----------------------------------------------------------------//
 //----------------------------------------------------------------//
+
+
+void setSharedMemory()
+{
+	int shm_stats;
+    shm_stats = shm_open(HEAVY_MEMORY_STAT, O_CREAT | O_RDWR, 0666); // Shared memory for stats with id "shareStats"
+	ftruncate(shm_stats, sizeof(long)); // Configure the size of the shared memory block
+    heavyMemory = mmap(0, sizeof(long), PROT_READ | PROT_WRITE, MAP_SHARED, shm_stats, 0);
+
+	heavyMemory = 0;
+}
+
 void getMemoryConsumption()
 {
-
+	struct rusage myUsage;
+    getrusage(RUSAGE_SELF, &myUsage);
+	heavyMemory += myUsage.ru_maxrss;
+    // return myUsage.ru_maxrss;
 }
 
 
@@ -40,11 +59,11 @@ void sobelFilter(char fileName[30], int index)
 	strcat(command, " ");
 	strcat(command, fileName);
 	strcat(command, " files/heavy/");
-	
+
 	// char snum[5];
 	// sprintf(snum, "%d", index);
 	// strcat(command, snum);
-	
+
 	system(command);
 }
 
@@ -54,7 +73,7 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 	if(getpid() != mainProcessPid)
 	{
 		FILE *file;
-		char* response = "heavy";
+		char response[5] = "heavy";
 		char buffer[1];
 		int received = -1;
 
@@ -66,7 +85,10 @@ void receiveFile(int new_socket, int index, pid_t mainProcessPid)
 		strcat(fileName, extension);
 		file = fopen(fileName, "wb");
 
-		send(new_socket, response, strlen(response), 0);
+		// Get memory consumption by server
+		getMemoryConsumption();
+
+		send(new_socket, response, (strlen(response) - 1), 0);
 
 		while((received = recv(new_socket, buffer, 1, 0)) > 0) // Receive the whole file
 		{
@@ -130,7 +152,9 @@ void runServer(int index)
 
 int main(int argc, char const* argv[])
 {
-	int totalPictures = 20;
+	setSharedMemory();
+
+	int totalPictures = 100;
 	for(int counter = 1; counter <= totalPictures; counter++)
 	{
 		runServer(counter);

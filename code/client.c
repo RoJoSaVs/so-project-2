@@ -30,19 +30,31 @@
 
 char *ip; // Ip address
 int port; // Conection port
-// char *picture; // Picture to process
 
-#define STATS_SEMAPHORE_NAME "statsSemaphore"
-#define SHARED_STATS_MEMORY "sharedStats"
+#define AVG_STATS_SEMAPHORE_NAME "avgStatsSemaphore"
+#define LIS_STATS_SEMAPHORE_NAME "loopStatsSemaphore"
 
-sem_t *semStats;
+sem_t *avgSemStats;
+sem_t *loopSemStats;
 //----------------------------------------------------------------//
 //----------------------------------------------------------------//
 
 
 void getSemaphore()
 {
-    semStats = sem_open(STATS_SEMAPHORE_NAME, O_CREAT | O_RDWR, 0666, 1);
+    avgSemStats = sem_open(AVG_STATS_SEMAPHORE_NAME, O_CREAT | O_RDWR, 0666, 1);
+    loopSemStats = sem_open(LIS_STATS_SEMAPHORE_NAME, O_CREAT | O_RDWR, 0666, 1);
+
+    // while(1)
+    // {
+    //     if((sem_trywait(avgSemStats) == -1) && (sem_trywait(loopSemStats) == -1))
+    //     {
+    //         break;
+    //     }
+    // }
+
+    // sem_post(avgSemStats);
+    // sem_post(loopSemStats);
 }
 
 
@@ -107,13 +119,12 @@ int main(int argc, char *argv[])
                 printf(" \t \t \t Socket creation error \n");
                 printf("---------------------------------------------------------------------\n");
                 reset();
-
                 exit(0);
             }
         
             serv_addr.sin_family = AF_INET;
             serv_addr.sin_port = htons(port);
-        
+
 
             // Convert IPv4 and IPv6 addresses from text to binary
             if (inet_pton(AF_INET, ip, &serv_addr.sin_addr) <= 0) 
@@ -123,10 +134,9 @@ int main(int argc, char *argv[])
                 printf("\t \t Invalid address/ Address not supported \n");
                 printf("---------------------------------------------------------------------\n");
                 reset();
-                
                 exit(0);
             }
-            
+
             if (connect(client_fd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
             {
                 bold_red();
@@ -134,7 +144,6 @@ int main(int argc, char *argv[])
                 printf("\t \t \tConnection Failed \n");
                 printf("---------------------------------------------------------------------\n");
                 reset();
-
                 exit(0);
             }
 
@@ -166,8 +175,9 @@ int main(int argc, char *argv[])
             double timeExecutionReq = (double)tval_resultReq.tv_sec + ((double)tval_resultReq.tv_usec) / CLOCKS_PER_SEC;
 
             // Semaphore for time per request stat
+            sem_wait(loopSemStats);
             save("files/timeRequest.json", response, loops + 1, timeExecutionReq, 0, 0, byteCounter);
-
+            sem_post(loopSemStats);
 
             bold_green();
             printf("\n---------------------------------------------------------------------\n");
@@ -177,7 +187,7 @@ int main(int argc, char *argv[])
             printf("---------------------------------------------------------------------\n");
             reset();
             strcpy(serverName, response);
-        
+
             close(client_fd); // closing the connected socket
         }
 
@@ -187,9 +197,10 @@ int main(int argc, char *argv[])
         double timeExecution = (double)tval_result.tv_sec + ((double)tval_result.tv_usec) / CLOCKS_PER_SEC;
 
         // Sem Stats
+        sem_wait(avgSemStats);
         save("files/stats.json", serverName, totalRequest, timeExecution, 0, 0, byteCounter);
-        
-        
+        sem_post(avgSemStats);
+
     }
     return 0;
 }

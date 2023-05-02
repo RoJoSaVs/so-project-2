@@ -33,3 +33,13 @@ typedef struct statsStruct // Struct for visualizer module
     int killProcess; // Read only for server | visualizer can edit
 
 } statsStruct;
+
+
+typedef struct memoryStruct // Struct for visualizer module
+{
+    long fifoMemory;
+    long heavyMemory;
+    long threadMemory;
+    long preheavyMemory;
+
+}memoryStruct;

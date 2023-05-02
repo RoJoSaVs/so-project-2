@@ -53,8 +53,8 @@ def getStats(filename):
 
 def drawStats():
 	# ylabelValue = ["Time Execution", "Average Request Time", "Memory Consumption", "Bandwidth"]
-	timeRequest = getStats("../files/timeRequest.json") # Incremental stats
-	stats = getStats("../files/stats.json") # Average Stats file
+	timeRequest = getStats("files/timeRequest.json") # Incremental stats
+	stats = getStats("files/stats.json") # Average Stats file
 
 	# First Stat ExecutionTime vs Request
 	plt.figure(1, figsize = (5, 4))
