@@ -11,11 +11,16 @@ build: # Compile all files needed to run the project
 	gcc code/Cliente_secu.c -o Cliente_secu -lpthread -lrt
 
 
+ip?=127.0.0.1
+port?=25565
+image?=itachi.jpg
+threads?=1
+loops?=5
 client: # -lpthread: Require to use threads
 	clear
 	gcc code/client.c -o output/client -lpthread -lrt
-	# ./output/client $(ip) $(port) $(image) $(threads) $(loops)
-	./output/client 127.0.0.1 25565 files/img/itachi.jpg 1 5
+	 ./output/client $(ip) $(port) $(image) $(threads) $(loops)
+	#./output/client 127.0.0.1 25565 files/img/itachi.jpg 1 5
 
 
 server:
@@ -30,6 +35,12 @@ heavy:
 	clear
 	gcc code/heavyServer.c -o output/heavyServer
 	./output/heavyServer
+
+numProcess?=3
+preheavy:
+	clear
+	gcc code/preHeavyServer.c -o output/preHeavyServer -lncurses
+	./output/preHeavyServer $(numProcess)
 
 
 server_secu:
